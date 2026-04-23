@@ -3,207 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Al-Bayan | البيان — Smart Software Solutions</title>
+<title>البيان | Al-Bayan — Smart Software Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== VARIABLES — NEW EMERALD/TEAL LUXURY PALETTE ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --p:#059669;      /* emerald */
-  --p2:#0D9488;     /* teal */
-  --p3:#10B981;     /* mint */
-  --acc:#F0FDF4;    /* light mint */
-  --gold:#D4AF37;   /* classic gold */
-  --rose:#E11D48;   /* accent rose */
-  --dk:#020c0a;     /* deep dark green-black */
-  --dk2:#061210;
-  --dk3:#0a1a16;
-  --lt:#F0FDF9;
-  --muted:#5EADA0;
+  --p:#059669;--p2:#0D9488;--p3:#10B981;
+  --gold:#D4AF37;--dk:#020c0a;--dk2:#061210;--dk3:#0a1a16;
+  --lt:#F0FDF9;--muted:#5EADA0;
   --glass:rgba(5,150,105,0.06);
-  --border:rgba(5,150,105,0.12);
-  --border2:rgba(255,255,255,0.06);
+  --border:rgba(5,150,105,0.12);--border2:rgba(255,255,255,0.06);
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Tajawal','Outfit',sans-serif;
-  background:var(--dk);color:var(--lt);
-  overflow-x:hidden;cursor:none;
-  direction:rtl;
-}
+body{font-family:'Tajawal','Outfit',sans-serif;background:var(--dk);color:var(--lt);overflow-x:hidden;cursor:none;direction:rtl;transition:font-family .3s}
+body.en{font-family:'Outfit','Tajawal',sans-serif;direction:ltr}
 
-/* ===== CURSOR ===== */
+/* CURSOR */
 .cursor{position:fixed;width:10px;height:10px;background:var(--p3);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .3s,height .3s}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(16,185,129,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
 
-/* ===== LOADER ===== */
+/* LOADER */
 #loader{position:fixed;inset:0;z-index:99990;background:var(--dk);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.loader-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(5,150,105,0.2) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 80% 100%,rgba(13,148,136,0.12) 0%,transparent 65%)}
+.loader-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(5,150,105,0.2),transparent 65%),radial-gradient(ellipse 50% 40% at 80% 100%,rgba(13,148,136,0.12),transparent 65%)}
 .loader-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(5,150,105,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(5,150,105,0.06) 1px,transparent 1px);background-size:55px 55px;animation:gridMove 20s linear infinite}
 @keyframes gridMove{from{background-position:0 0}to{background-position:55px 55px}}
 .loader-rings{position:relative;width:180px;height:180px;margin-bottom:2.5rem}
 .ring{position:absolute;border-radius:50%;border:1px solid transparent;animation:ringRotate linear infinite}
-.ring1{inset:0;border-color:rgba(5,150,105,0.7) transparent transparent transparent;animation-duration:3s}
-.ring2{inset:15px;border-color:transparent rgba(13,148,136,0.55) transparent transparent;animation-duration:4s;animation-direction:reverse}
-.ring3{inset:30px;border-color:rgba(16,185,129,0.4) transparent transparent transparent;animation-duration:2.5s}
-.ring4{inset:45px;border-color:transparent rgba(212,175,55,0.35) transparent transparent;animation-duration:5s;animation-direction:reverse}
+.ring1{inset:0;border-color:rgba(5,150,105,.7) transparent transparent transparent;animation-duration:3s}
+.ring2{inset:15px;border-color:transparent rgba(13,148,136,.55) transparent transparent;animation-duration:4s;animation-direction:reverse}
+.ring3{inset:30px;border-color:rgba(16,185,129,.4) transparent transparent transparent;animation-duration:2.5s}
+.ring4{inset:45px;border-color:transparent rgba(212,175,55,.35) transparent transparent;animation-duration:5s;animation-direction:reverse}
 @keyframes ringRotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .loader-center{position:absolute;inset:60px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,0.15),transparent);display:flex;align-items:center;justify-content:center;font-size:2.5rem;animation:centerPulse 2s ease-in-out infinite}
 @keyframes centerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.loader-logo{font-family:'Amiri',serif;font-size:3.2rem;font-weight:700;background:linear-gradient(135deg,#fff 0%,var(--p3) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fadeIn .8s .5s forwards}
-.loader-sub-ar{font-size:.82rem;color:rgba(255,255,255,0.35);letter-spacing:4px;margin-top:.2rem;opacity:0;animation:fadeIn .8s .7s forwards}
-.loader-sub-en{font-size:.72rem;color:rgba(5,150,105,0.5);letter-spacing:5px;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .9s forwards}
+.loader-logo{font-family:'Amiri',serif;font-size:3.2rem;font-weight:700;background:linear-gradient(135deg,#fff,var(--p3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fadeIn .8s .5s forwards}
+.loader-tagline{font-size:.8rem;color:rgba(5,150,105,0.6);letter-spacing:5px;text-transform:uppercase;margin:.4rem 0 2.5rem;opacity:0;animation:fadeIn .8s .8s forwards;font-family:'Outfit'}
 .loader-bar-wrap{width:260px;height:1px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;opacity:0;animation:fadeIn .8s 1s forwards}
-.loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--p3),var(--gold));animation:loadProgress 2.2s 1.2s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes loadProgress{0%{width:0}30%{width:35%}60%{width:72%}100%{width:100%}}
-.loader-pct{margin-top:.7rem;font-size:.72rem;color:rgba(255,255,255,0.25);letter-spacing:2px;opacity:0;animation:fadeIn .8s 1s forwards}
-@keyframes fadeIn{to{opacity:1}}
+.loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--p3),var(--gold));animation:loadProg 2.2s 1.2s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes loadProg{0%{width:0}30%{width:35%}60%{width:72%}100%{width:100%}}
+.loader-pct{margin-top:.7rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:2px;opacity:0;animation:fadeIn .8s 1s forwards;font-family:'Outfit'}
 .loader-particles{position:absolute;inset:0;pointer-events:none}
 .lp{position:absolute;border-radius:50%;animation:lpFloat linear infinite}
+@keyframes lpFloat{0%{opacity:0;transform:translateY(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-80vh)}}
 #loader.exit{animation:loaderExit .8s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes loaderExit{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);pointer-events:none}}
+@keyframes fadeIn{to{opacity:1}}
 
-/* ===== ANNOUNCE BAR ===== */
-#announce-bar{
-  position:fixed;top:0;left:0;right:0;z-index:99995;
-  background:linear-gradient(90deg,#064e3b,#059669,#0d9488,#064e3b);
-  background-size:300% 100%;animation:barShimmer 5s ease infinite;
-  padding:.5rem 1rem;display:flex;align-items:center;justify-content:center;gap:1rem;
-  font-size:.76rem;font-weight:700;color:white;letter-spacing:.3px;
-  border-bottom:1px solid rgba(16,185,129,0.2);
-  transform:translateY(-100%);transition:transform .6s cubic-bezier(.34,1.56,.64,1);
-}
+/* ANNOUNCE BAR */
+#announce-bar{position:fixed;top:0;left:0;right:0;z-index:99995;background:linear-gradient(90deg,#064e3b,#059669,#0d9488,#064e3b);background-size:300% 100%;animation:barShimmer 5s ease infinite;padding:.5rem 1rem;display:flex;align-items:center;justify-content:center;gap:1rem;font-size:.76rem;font-weight:700;color:white;border-bottom:1px solid rgba(16,185,129,.2);transform:translateY(-100%);transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
 #announce-bar.visible{transform:translateY(0)}
 @keyframes barShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.announce-badge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:30px;padding:.18rem .75rem;font-size:.68rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
-.announce-text{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:center}
-.announce-sep{color:rgba(255,255,255,0.3)}
-.announce-link{color:rgba(255,255,255,0.8);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.35);font-size:.72rem;transition:color .2s;white-space:nowrap}
-.announce-link:hover{color:white}
-.announce-close{position:absolute;left:1rem;background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:1rem;padding:.2rem;transition:color .2s}
+.announce-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:.18rem .75rem;font-size:.68rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.announce-close{position:absolute;left:1rem;background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem;padding:.2rem;transition:.2s}
 .announce-close:hover{color:white}
 body.bar-visible nav{top:34px}
 body.bar-visible{padding-top:34px}
 
-/* ===== POPUP ===== */
-#launch-overlay{position:fixed;inset:0;z-index:99993;background:rgba(2,12,10,0.88);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .5s}
+/* POPUP */
+#launch-overlay{position:fixed;inset:0;z-index:99993;background:rgba(2,12,10,.88);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .5s}
 #launch-overlay.open{opacity:1;pointer-events:all}
-.launch-popup{
-  position:relative;max-width:560px;width:100%;
-  background:linear-gradient(145deg,#071a14,#030f0b);
-  border:1px solid rgba(5,150,105,0.35);border-radius:24px;
-  padding:3rem 2.5rem 2.5rem;text-align:center;overflow:hidden;
-  transform:scale(.88) translateY(30px);transition:transform .55s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 0 0 1px rgba(5,150,105,0.1),0 40px 80px rgba(0,0,0,.9),0 0 80px rgba(5,150,105,0.08);
-}
+.launch-popup{position:relative;max-width:560px;width:100%;background:linear-gradient(145deg,#071a14,#030f0b);border:1px solid rgba(5,150,105,.35);border-radius:24px;padding:3rem 2.5rem 2.5rem;text-align:center;overflow:hidden;transform:scale(.88) translateY(30px);transition:transform .55s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 0 1px rgba(5,150,105,.1),0 40px 80px rgba(0,0,0,.9),0 0 80px rgba(5,150,105,.08)}
 #launch-overlay.open .launch-popup{transform:scale(1) translateY(0)}
-.popup-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,0.18),transparent 70%);pointer-events:none}
-.popup-glow2{position:absolute;bottom:-80px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.1),transparent 70%);pointer-events:none}
+.popup-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,.18),transparent 70%);pointer-events:none}
+.popup-glow2{position:absolute;bottom:-80px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.1),transparent 70%);pointer-events:none}
 .sparkle{position:absolute;pointer-events:none;font-size:1.1rem;animation:sparkleFly linear infinite;opacity:0}
-@keyframes sparkleFly{0%{opacity:0;transform:translate(0,0) scale(0) rotate(0deg)}20%{opacity:1;transform:translate(var(--tx1),var(--ty1)) scale(1) rotate(180deg)}100%{opacity:0;transform:translate(var(--tx2),var(--ty2)) scale(.3) rotate(360deg)}}
-.popup-close{position:absolute;top:1.1rem;left:1.1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,.35);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:.3s}
+@keyframes sparkleFly{0%{opacity:0;transform:translate(0,0) scale(0) rotate(0)}20%{opacity:1;transform:translate(var(--tx1),var(--ty1)) scale(1) rotate(180deg)}100%{opacity:0;transform:translate(var(--tx2),var(--ty2)) scale(.3) rotate(360deg)}}
+.popup-close{position:absolute;top:1.1rem;left:1.1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.35);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:.3s}
 .popup-close:hover{background:rgba(255,255,255,.1);color:white}
 .popup-crown{font-size:3.2rem;display:block;margin-bottom:.8rem;animation:crownBounce 2s ease-in-out infinite}
 @keyframes crownBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
-.popup-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6ee7b7;padding:.3rem 1.1rem;border-radius:30px;font-size:.7rem;font-weight:800;letter-spacing:2px;margin-bottom:1.2rem}
+.popup-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);color:#6ee7b7;padding:.3rem 1.1rem;border-radius:30px;font-size:.7rem;font-weight:800;letter-spacing:2px;margin-bottom:1.2rem;font-family:'Outfit'}
 .popup-badge-dot{width:5px;height:5px;border-radius:50%;background:#6ee7b7;animation:pulse 1.5s ease-in-out infinite}
-.popup-lang-line{font-size:.72rem;color:rgba(16,185,129,0.5);letter-spacing:3px;margin-bottom:1rem;font-family:'Outfit',sans-serif}
-.popup-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:900;line-height:1.25;margin-bottom:.5rem;background:linear-gradient(135deg,#fff 0%,#a7f3d0 40%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.popup-title-en{font-family:'Outfit',sans-serif;font-size:clamp(1rem,2.5vw,1.2rem);font-weight:700;color:rgba(255,255,255,0.2);margin-bottom:1.2rem;direction:ltr}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.5)}}
+.popup-title{font-size:clamp(1.5rem,4vw,2rem);font-weight:900;line-height:1.25;margin-bottom:.8rem;background:linear-gradient(135deg,#fff,#a7f3d0,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .popup-desc{font-size:.87rem;color:rgba(255,255,255,.4);line-height:1.85;margin-bottom:1.5rem}
 .popup-countdown{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem}
 .countdown-item{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:55px}
-.countdown-num{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:800;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);border-radius:10px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;color:#a7f3d0;position:relative}
-.countdown-num::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:rgba(255,255,255,0.03);border-radius:10px 10px 0 0}
+.countdown-num{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:800;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.25);border-radius:10px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;color:#a7f3d0;position:relative}
+.countdown-num::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:rgba(255,255,255,.03);border-radius:10px 10px 0 0}
 .countdown-num.flip{animation:flip .3s ease}
 @keyframes flip{0%{transform:rotateX(0);color:#6ee7b7}50%{transform:rotateX(-90deg)}100%{transform:rotateX(0);color:#a7f3d0}}
-.countdown-label{font-size:.6rem;color:var(--muted);letter-spacing:1px;font-weight:600}
-.countdown-sep{font-size:1.7rem;color:rgba(5,150,105,0.4);align-self:center;margin-top:-1rem;animation:sepBlink 1s ease-in-out infinite}
+.countdown-label{font-size:.6rem;color:var(--muted);letter-spacing:1px;font-weight:600;font-family:'Outfit'}
+.countdown-sep{font-size:1.7rem;color:rgba(5,150,105,.4);align-self:center;margin-top:-1rem;animation:sepBlink 1s ease-in-out infinite}
 @keyframes sepBlink{0%,100%{opacity:1}50%{opacity:.15}}
-.popup-offer{display:flex;align-items:center;justify-content:center;gap:.7rem;background:rgba(212,175,55,0.07);border:1px solid rgba(212,175,55,0.18);border-radius:12px;padding:.85rem 1.2rem;margin-bottom:1.8rem;font-size:.83rem;color:rgba(255,255,255,.6)}
+.popup-offer{display:flex;align-items:center;justify-content:center;gap:.7rem;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.18);border-radius:12px;padding:.85rem 1.2rem;margin-bottom:1.8rem;font-size:.83rem;color:rgba(255,255,255,.6)}
 .popup-offer strong{color:#fde68a}
 .popup-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
-.popup-cta{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.85rem 2rem;border:none;border-radius:10px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:.93rem;font-weight:800;transition:.3s;box-shadow:0 0 30px rgba(5,150,105,0.3);position:relative;overflow:hidden}
+.popup-cta{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.85rem 2rem;border:none;border-radius:10px;cursor:pointer;font-size:.93rem;font-weight:800;transition:.3s;box-shadow:0 0 30px rgba(5,150,105,.3);position:relative;overflow:hidden}
 .popup-cta::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.1);border-radius:50%;transform:translate(-50%,-50%);transition:.5s}
 .popup-cta:hover::before{width:300px;height:300px}
 .popup-cta:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(5,150,105,.5)}
-.popup-skip{background:none;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,.3);padding:.85rem 1.4rem;border-radius:10px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:.85rem;transition:.3s}
+.popup-skip{background:none;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.3);padding:.85rem 1.4rem;border-radius:10px;cursor:pointer;font-size:.85rem;transition:.3s}
 .popup-skip:hover{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
 
-/* ===== CANVAS ===== */
-#canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.5}
+/* CANVAS */
+#canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.5}
 
-/* ===== LANG SWITCH ===== */
-.lang-switch{display:flex;align-items:center;gap:.3rem;background:rgba(5,150,105,0.08);border:1px solid rgba(5,150,105,0.2);border-radius:30px;padding:.25rem .3rem;cursor:pointer}
-.lang-btn{padding:.2rem .7rem;border-radius:20px;font-size:.72rem;font-weight:700;cursor:pointer;border:none;background:none;color:rgba(255,255,255,.4);transition:.3s;letter-spacing:.5px}
+/* LANG SWITCH */
+.lang-switch{display:flex;align-items:center;background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.2);border-radius:30px;padding:.22rem .3rem;gap:.2rem}
+.lang-btn{padding:.2rem .75rem;border-radius:20px;font-size:.72rem;font-weight:700;cursor:pointer;border:none;background:none;color:rgba(255,255,255,.4);transition:.3s;letter-spacing:.5px;font-family:'Outfit'}
 .lang-btn.active{background:var(--p);color:white}
 
-/* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(2,12,10,0.75);backdrop-filter:blur(30px);border-bottom:1px solid rgba(5,150,105,0.1);transition:.3s}
-nav.scrolled{padding:.7rem 3rem;background:rgba(2,12,10,0.96);border-bottom-color:rgba(5,150,105,0.2)}
-.logo{font-family:'Amiri',serif;font-size:1.9rem;font-weight:700;cursor:pointer;position:relative;line-height:1}
-.logo-ar{background:linear-gradient(135deg,#fff,var(--p3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.logo-en{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:600;color:rgba(16,185,129,0.5);letter-spacing:3px;display:block;text-transform:uppercase;direction:ltr;margin-top:.1rem}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.85rem;font-weight:600;transition:.3s;position:relative}
-.nav-links a .ar{display:block}.nav-links a .en{display:none;font-family:'Outfit';font-size:.78rem}
+/* NAV */
+nav{position:sticky;top:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(2,12,10,.8);backdrop-filter:blur(30px);border-bottom:1px solid rgba(5,150,105,.1);transition:.3s}
+nav.scrolled{padding:.7rem 3rem;background:rgba(2,12,10,.96);border-bottom-color:rgba(5,150,105,.2)}
+.logo-wrap{cursor:pointer;line-height:1.1}
+.logo-main{font-family:'Amiri',serif;font-size:1.9rem;font-weight:700;background:linear-gradient(135deg,#fff,var(--p3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.logo-sub{font-family:'Outfit',sans-serif;font-size:.6rem;font-weight:600;color:rgba(16,185,129,.45);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:.1rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.86rem;font-weight:600;transition:.3s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:1px;background:var(--p3);transition:.3s}
+body.en .nav-links a::after{right:auto;left:0}
 .nav-links a:hover{color:white}.nav-links a:hover::after{width:100%}
-.nav-btn{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.5rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.84rem;font-weight:700;transition:.3s;box-shadow:0 0 20px rgba(5,150,105,0.2)}
+.nav-btn{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.5rem 1.5rem;border-radius:6px;text-decoration:none;font-size:.84rem;font-weight:700;transition:.3s;box-shadow:0 0 20px rgba(5,150,105,.2);white-space:nowrap}
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(5,150,105,.4)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--lt);transition:.3s;border-radius:2px}
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;z-index:1}
-.hero-orb1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,0.12) 0%,transparent 70%);top:-150px;right:-200px;animation:float1 10s ease-in-out infinite;pointer-events:none}
-.hero-orb2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,0.1) 0%,transparent 70%);bottom:-50px;left:-100px;animation:float2 13s ease-in-out infinite;pointer-events:none}
-.hero-orb3{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.05) 0%,transparent 70%);top:35%;left:25%;animation:float3 9s ease-in-out infinite;pointer-events:none}
+.hero-orb1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,.12),transparent 70%);top:-150px;right:-200px;animation:float1 10s ease-in-out infinite;pointer-events:none}
+.hero-orb2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.1),transparent 70%);bottom:-50px;left:-100px;animation:float2 13s ease-in-out infinite;pointer-events:none}
+.hero-orb3{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.05),transparent 70%);top:35%;left:25%;animation:float3 9s ease-in-out infinite;pointer-events:none}
 @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,50px)}}
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}}
 @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,25px)}}
-.hero-tag{display:inline-flex;align-items:center;gap:.6rem;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);color:#6ee7b7;padding:.42rem 1.3rem;border-radius:4px;font-size:.75rem;font-weight:700;margin-bottom:2.5rem;letter-spacing:2px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .3s forwards}
+.hero-tag{display:inline-flex;align-items:center;gap:.6rem;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.25);color:#6ee7b7;padding:.42rem 1.3rem;border-radius:4px;font-size:.75rem;font-weight:700;margin-bottom:2.5rem;letter-spacing:2px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .3s forwards;font-family:'Outfit'}
 .dot{width:6px;height:6px;background:var(--p3);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.5)}}
 h1.main{font-size:clamp(2.3rem,6vw,4.8rem);font-weight:900;line-height:1.1;margin-bottom:1.8rem;opacity:0;transform:translateY(30px);animation:fadeUp 1s .5s forwards}
 .grad-text{background:linear-gradient(135deg,var(--p3),var(--p2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.hero-sub-en{font-family:'Outfit',sans-serif;font-size:clamp(1rem,2.5vw,1.4rem);font-weight:300;color:rgba(255,255,255,0.2);margin-bottom:1rem;direction:ltr;opacity:0;transform:translateY(20px);animation:fadeUp .9s .55s forwards}
-.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.4);max-width:580px;line-height:2;margin:0 auto 3rem;opacity:0;transform:translateY(20px);animation:fadeUp .9s .7s forwards}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.42);max-width:600px;line-height:2;margin:0 auto 3rem;opacity:0;transform:translateY(20px);animation:fadeUp .9s .7s forwards}
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fadeUp .9s .9s forwards}
-.btn-glow{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.95rem 2.6rem;border-radius:6px;text-decoration:none;font-weight:800;font-size:.97rem;border:none;cursor:pointer;transition:.3s;box-shadow:0 0 30px rgba(5,150,105,0.3);position:relative;overflow:hidden}
+.btn-glow{background:linear-gradient(135deg,var(--p),var(--p2));color:white;padding:.95rem 2.6rem;border-radius:6px;text-decoration:none;font-weight:800;font-size:.97rem;border:none;cursor:pointer;transition:.3s;box-shadow:0 0 30px rgba(5,150,105,.3);position:relative;overflow:hidden}
 .btn-glow::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%);transition:.6s}
 .btn-glow:hover::after{width:300px;height:300px}
 .btn-glow:hover{transform:translateY(-3px);box-shadow:0 0 55px rgba(5,150,105,.5)}
-.btn-outline{background:transparent;color:var(--lt);padding:.95rem 2.6rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:.97rem;border:1px solid rgba(255,255,255,0.1);cursor:pointer;transition:.3s}
-.btn-outline:hover{border-color:var(--p3);color:var(--p3);background:rgba(16,185,129,0.05)}
+.btn-outline{background:transparent;color:var(--lt);padding:.95rem 2.6rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:.97rem;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:.3s}
+.btn-outline:hover{border-color:var(--p3);color:var(--p3);background:rgba(16,185,129,.05)}
 .scroll-hint{margin-top:4rem;opacity:0;animation:fadeUp .9s 1.3s forwards;display:flex;flex-direction:column;align-items:center;gap:.7rem}
-.scroll-hint p{font-size:.65rem;color:rgba(255,255,255,.18);letter-spacing:4px;text-transform:uppercase}
+.scroll-hint p{font-size:.65rem;color:rgba(255,255,255,.18);letter-spacing:4px;text-transform:uppercase;font-family:'Outfit'}
 .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--p3),transparent);animation:scrollLine 2s ease-in-out infinite}
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-/* ===== STATS ===== */
-.stats-bar{display:flex;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(5,150,105,0.02)}
+/* STATS */
+.stats-bar{display:flex;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(5,150,105,.02)}
 .stat{flex:1;min-width:150px;text-align:center;padding:2.5rem 1rem;border-left:1px solid var(--border);position:relative;overflow:hidden;transition:.3s}
+body.en .stat{border-left:none;border-right:1px solid var(--border)}
+body.en .stat:last-child{border-right:none}
 .stat:last-child{border-left:none}
-.stat:hover{background:rgba(5,150,105,0.04)}
+.stat:hover{background:rgba(5,150,105,.04)}
 .stat::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:linear-gradient(90deg,transparent,var(--p3),transparent);transition:.4s}
 .stat:hover::before{width:80%}
 .stat-n{font-family:'Outfit',sans-serif;font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,var(--p3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
-.stat-l-ar{font-size:.78rem;color:var(--muted);margin-top:.4rem;letter-spacing:.5px}
-.stat-l-en{font-size:.65rem;color:rgba(255,255,255,.18);letter-spacing:1px;font-family:'Outfit';direction:ltr}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.4rem;letter-spacing:.5px}
 
-/* ===== SECTION ===== */
+/* SECTION */
 .section{padding:7rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1}
-.sec-eyebrow{font-size:.7rem;color:var(--p3);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
-.sec-eyebrow::before{content:'';width:18px;height:1px;background:var(--p3);display:inline-block}
-.sec-eyebrow .en{font-family:'Outfit';opacity:.5;margin-right:.3rem}
-h2.sec-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:900;line-height:1.15;margin-bottom:.5rem}
+.sec-eyebrow{font-size:.7rem;color:var(--p3);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;font-family:'Outfit'}
+.sec-eyebrow::before{content:'';width:18px;height:1px;background:var(--p3);display:inline-block;flex-shrink:0}
+h2.sec-title{font-size:clamp(1.9rem,4vw,3rem);font-weight:900;line-height:1.15;margin-bottom:.4rem}
 h2.sec-title em{font-style:normal;background:linear-gradient(135deg,var(--p3),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sec-title-en{font-family:'Outfit',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:300;color:rgba(255,255,255,.12);margin-bottom:1rem;direction:ltr}
-.sec-sub{color:var(--muted);font-size:.95rem;line-height:1.9;max-width:500px;margin-bottom:1rem}
-.sec-sub-en{font-family:'Outfit';font-size:.82rem;color:rgba(255,255,255,.18);line-height:1.7;max-width:480px;margin-bottom:3.5rem;direction:ltr}
+.sec-sub{color:var(--muted);font-size:.95rem;line-height:1.9;max-width:520px;margin-bottom:3.5rem}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
@@ -213,59 +176,58 @@ h2.sec-title em{font-style:normal;background:linear-gradient(135deg,var(--p3),va
 .reveal-r{opacity:0;transform:translateX(50px);transition:opacity .8s,transform .8s}
 .reveal-r.visible{opacity:1;transform:translateX(0)}
 
-/* ===== SERVICES ===== */
+/* SERVICES */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
 .scard{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:2rem 1.8rem;position:relative;overflow:hidden;cursor:pointer;transition:.4s}
 .scard-shimmer{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);transform:skewX(-20deg);transition:.6s}
 .scard:hover .scard-shimmer{left:150%}
-.scard:hover{border-color:rgba(5,150,105,0.4);transform:translateY(-8px);background:rgba(5,150,105,0.06);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.scard:hover{border-color:rgba(5,150,105,.4);transform:translateY(-8px);background:rgba(5,150,105,.06);box-shadow:0 20px 40px rgba(0,0,0,.4)}
 .scard-glow{position:absolute;width:200px;height:200px;border-radius:50%;top:-60px;right:-60px;opacity:0;transition:.4s;pointer-events:none}
+body.en .scard-glow{right:auto;left:-60px}
 .scard:hover .scard-glow{opacity:1}
 .scard-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem;position:relative;z-index:1}
-.scard h3{font-size:1rem;font-weight:700;margin-bottom:.2rem;position:relative;z-index:1}
-.scard h3 .en{display:block;font-family:'Outfit';font-size:.72rem;font-weight:400;color:rgba(255,255,255,.2);margin-top:.15rem;direction:ltr}
-.scard p{font-size:.85rem;color:var(--muted);line-height:1.7;position:relative;z-index:1}
+.scard h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;position:relative;z-index:1}
+.scard p{font-size:.85rem;color:var(--muted);line-height:1.75;position:relative;z-index:1}
 .scard-arrow{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;color:var(--p3);font-size:.8rem;font-weight:700;opacity:0;transform:translateX(10px);transition:.3s;position:relative;z-index:1}
+body.en .scard-arrow{transform:translateX(-10px)}
 .scard:hover .scard-arrow{opacity:1;transform:translateX(0)}
-.ic1{background:rgba(5,150,105,0.12)}.ic2{background:rgba(13,148,136,0.12)}.ic3{background:rgba(212,175,55,0.12)}.ic4{background:rgba(225,29,72,0.1)}
-.gc1{background:radial-gradient(circle,rgba(5,150,105,0.2),transparent)}.gc2{background:radial-gradient(circle,rgba(13,148,136,0.2),transparent)}.gc3{background:radial-gradient(circle,rgba(212,175,55,0.18),transparent)}.gc4{background:radial-gradient(circle,rgba(225,29,72,0.15),transparent)}
+.ic1{background:rgba(5,150,105,.12)}.ic2{background:rgba(13,148,136,.12)}.ic3{background:rgba(212,175,55,.12)}.ic4{background:rgba(225,29,72,.1)}
+.gc1{background:radial-gradient(circle,rgba(5,150,105,.2),transparent)}.gc2{background:radial-gradient(circle,rgba(13,148,136,.2),transparent)}.gc3{background:radial-gradient(circle,rgba(212,175,55,.18),transparent)}.gc4{background:radial-gradient(circle,rgba(225,29,72,.15),transparent)}
 .tech-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.5rem}
-.tech-pill{padding:.45rem 1.1rem;border-radius:4px;background:rgba(5,150,105,0.05);border:1px solid var(--border);font-size:.78rem;color:rgba(255,255,255,.35);transition:.3s;cursor:default;font-family:'Outfit'}
-.tech-pill:hover{background:rgba(5,150,105,0.12);border-color:rgba(5,150,105,0.3);color:#6ee7b7;transform:translateY(-2px)}
+.tech-pill{padding:.45rem 1.1rem;border-radius:4px;background:rgba(5,150,105,.05);border:1px solid var(--border);font-size:.78rem;color:rgba(255,255,255,.35);transition:.3s;cursor:default;font-family:'Outfit'}
+.tech-pill:hover{background:rgba(5,150,105,.12);border-color:rgba(5,150,105,.3);color:#6ee7b7;transform:translateY(-2px)}
 
-/* ===== WHY ===== */
+/* WHY */
 .why-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .why-item{display:flex;gap:1rem;align-items:flex-start;padding:1.4rem;border-radius:12px;background:var(--glass);border:1px solid var(--border);transition:.3s;cursor:default}
-.why-item:hover{background:rgba(5,150,105,0.07);border-color:rgba(5,150,105,0.25);transform:translateY(-3px)}
-.why-icon{width:40px;height:40px;border-radius:10px;background:rgba(5,150,105,0.12);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:.3s}
+.why-item:hover{background:rgba(5,150,105,.07);border-color:rgba(5,150,105,.25);transform:translateY(-3px)}
+.why-icon{width:40px;height:40px;border-radius:10px;background:rgba(5,150,105,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:.3s}
 .why-item:hover .why-icon{transform:scale(1.1) rotate(-5deg)}
-.why-item h4{font-size:.9rem;font-weight:700;margin-bottom:.1rem}
-.why-item h4 .en{font-family:'Outfit';font-size:.7rem;font-weight:400;color:rgba(255,255,255,.2);display:block;direction:ltr;margin-top:.1rem}
+.why-item h4{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
 .why-item p{font-size:.82rem;color:var(--muted);line-height:1.6}
 
-/* ===== PORTFOLIO ===== */
+/* PORTFOLIO */
 .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem}
 .pcard{border-radius:16px;overflow:hidden;background:var(--dk3);border:1px solid var(--border2);transition:.4s;cursor:pointer;position:relative}
-.pcard:hover{transform:translateY(-10px);border-color:rgba(16,185,129,0.3);box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.pcard:hover{transform:translateY(-10px);border-color:rgba(16,185,129,.3);box-shadow:0 40px 80px rgba(0,0,0,.5)}
 .pthumb{height:185px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
 .pthumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--dk3))}
 .pt1{background:linear-gradient(135deg,rgba(5,150,105,.6),rgba(13,148,136,.3))}.pt2{background:linear-gradient(135deg,rgba(212,175,55,.5),rgba(225,29,72,.3))}.pt3{background:linear-gradient(135deg,rgba(13,148,136,.6),rgba(5,150,105,.3))}
-.pcard-view{position:absolute;top:1rem;left:1rem;background:rgba(2,12,10,0.85);border:1px solid rgba(255,255,255,.08);color:white;border-radius:6px;padding:.3rem .8rem;font-size:.67rem;font-weight:700;letter-spacing:1px;opacity:0;transform:translateY(-5px);transition:.3s;z-index:2}
+.pcard-view{position:absolute;top:1rem;left:1rem;background:rgba(2,12,10,.85);border:1px solid rgba(255,255,255,.08);color:white;border-radius:6px;padding:.3rem .8rem;font-size:.67rem;font-weight:700;letter-spacing:1px;opacity:0;transform:translateY(-5px);transition:.3s;z-index:2;font-family:'Outfit'}
 .pcard:hover .pcard-view{opacity:1;transform:translateY(0)}
 .pbody{padding:1.5rem}
-.pbody h3{font-size:.97rem;font-weight:800;margin-bottom:.25rem}
-.pbody h3 .en{font-family:'Outfit';font-size:.75rem;font-weight:400;color:rgba(255,255,255,.2);display:block;direction:ltr;margin-top:.1rem}
+.pbody h3{font-size:.97rem;font-weight:800;margin-bottom:.5rem}
 .pbody p{font-size:.83rem;color:var(--muted);margin-bottom:1rem;line-height:1.6}
 .ptags{display:flex;gap:.4rem;flex-wrap:wrap}
-.ptag{font-size:.68rem;padding:.22rem .65rem;border-radius:4px;background:rgba(5,150,105,0.1);color:#6ee7b7;border:1px solid rgba(5,150,105,0.18);font-family:'Outfit'}
+.ptag{font-size:.68rem;padding:.22rem .65rem;border-radius:4px;background:rgba(5,150,105,.1);color:#6ee7b7;border:1px solid rgba(5,150,105,.18);font-family:'Outfit'}
 
-/* ===== ABOUT ===== */
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.about-blob{width:100%;padding-bottom:100%;border-radius:24px;background:linear-gradient(145deg,rgba(5,150,105,0.1),rgba(13,148,136,0.06));border:1px solid rgba(5,150,105,0.15);position:relative;overflow:hidden}
-.about-blob::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(5,150,105,0.12),transparent 60%),radial-gradient(circle at 70% 70%,rgba(212,175,55,0.07),transparent 60%)}
+.about-blob{width:100%;padding-bottom:100%;border-radius:24px;background:linear-gradient(145deg,rgba(5,150,105,.1),rgba(13,148,136,.06));border:1px solid rgba(5,150,105,.15);position:relative;overflow:hidden}
+.about-blob::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(5,150,105,.12),transparent 60%),radial-gradient(circle at 70% 70%,rgba(212,175,55,.07),transparent 60%)}
 .about-blob-inner{position:absolute;inset:20px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:5rem;animation:blobPulse 6s ease-in-out infinite}
 @keyframes blobPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.floating-badge{position:absolute;background:rgba(2,12,10,0.92);border:1px solid rgba(5,150,105,0.25);border-radius:10px;padding:.7rem 1rem;backdrop-filter:blur(20px)}
+.floating-badge{position:absolute;background:rgba(2,12,10,.92);border:1px solid rgba(5,150,105,.25);border-radius:10px;padding:.7rem 1rem;backdrop-filter:blur(20px)}
 .fb1{bottom:10%;right:-10%;animation:fbFloat1 4s ease-in-out infinite}.fb2{top:15%;left:-10%;animation:fbFloat2 5s ease-in-out infinite}
 @keyframes fbFloat1{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes fbFloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
@@ -273,132 +235,113 @@ h2.sec-title em{font-style:normal;background:linear-gradient(135deg,var(--p3),va
 .about-cards-v{display:flex;flex-direction:column;gap:.9rem;margin-top:2rem}
 .acard{padding:1.2rem 1.5rem;border-radius:12px;background:var(--glass);border:1px solid var(--border);position:relative;overflow:hidden;transition:.3s;cursor:default}
 .acard::before{content:'';position:absolute;top:0;right:0;width:2px;height:100%}
+body.en .acard::before{right:auto;left:0}
 .ac1::before{background:linear-gradient(to bottom,var(--p),var(--p3))}.ac2::before{background:linear-gradient(to bottom,var(--p2),var(--p3))}.ac3::before{background:linear-gradient(to bottom,var(--gold),var(--p))}
-.acard:hover{background:rgba(5,150,105,0.06);transform:translateX(-5px)}
-.acard h4{font-size:.85rem;color:#6ee7b7;font-weight:700;margin-bottom:.2rem}
-.acard h4 .en{font-family:'Outfit';font-size:.72rem;font-weight:400;color:rgba(255,255,255,.18);display:inline;margin-right:.5rem;direction:ltr}
+.acard:hover{background:rgba(5,150,105,.06);transform:translateX(-5px)}
+body.en .acard:hover{transform:translateX(5px)}
+.acard h4{font-size:.85rem;color:#6ee7b7;font-weight:700;margin-bottom:.3rem}
 .acard p{font-size:.82rem;color:var(--muted);line-height:1.6}
 
-/* ===== CONTACT ===== */
+/* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1000px;margin:0 auto;align-items:start}
-.contact-info{display:flex;flex-direction:column;gap:1.2rem}
 .contact-info-title{font-size:1.1rem;font-weight:800;margin-bottom:.5rem}
-.contact-info-title .en{font-family:'Outfit';font-size:.8rem;font-weight:400;color:rgba(255,255,255,.2);display:block;direction:ltr}
-.contact-info-desc{font-size:.87rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
-.clink{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--glass);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--lt);transition:.3s;cursor:pointer;position:relative;overflow:hidden}
-.clink:hover{background:rgba(5,150,105,0.08);border-color:rgba(5,150,105,0.3);transform:translateX(-5px)}
+.contact-info-desc{font-size:.87rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+.clink{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--glass);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--lt);transition:.3s;margin-bottom:.8rem}
+.clink:hover{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.3);transform:translateX(-5px)}
+body.en .clink:hover{transform:translateX(5px)}
 .clink-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:.3s}
 .clink:hover .clink-icon{transform:scale(1.1)}
-.cic-green{background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.2)}
-.cic-blue{background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.2)}
-.cic-tg{background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.2)}
-.cic-wa{background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.2)}
-.clink-val{font-size:.88rem;font-weight:700;direction:ltr;text-align:left}
+.cic-green{background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.2)}.cic-blue{background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.2)}.cic-tg{background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.2)}.cic-wa{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.2)}
+.clink-val{font-size:.88rem;font-weight:700;direction:ltr;font-family:'Outfit'}
 .clink-type{font-size:.7rem;color:var(--muted);margin-top:.1rem;font-family:'Outfit'}
 .contact-box{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden}
-.contact-box::before{content:'';position:absolute;top:-100px;right:50%;transform:translateX(50%);width:300px;height:300px;background:radial-gradient(circle,rgba(5,150,105,0.08),transparent);border-radius:50%;pointer-events:none}
-.contact-head{margin-bottom:2rem;position:relative;z-index:1}
+.contact-box::before{content:'';position:absolute;top:-100px;right:50%;transform:translateX(50%);width:300px;height:300px;background:radial-gradient(circle,rgba(5,150,105,.08),transparent);border-radius:50%;pointer-events:none}
 .fgroup{margin-bottom:1.2rem;position:relative;z-index:1}
 .fgroup label{display:block;font-size:.78rem;color:rgba(255,255,255,.35);font-weight:600;margin-bottom:.5rem;letter-spacing:.5px}
-.fgroup label .en{font-family:'Outfit';opacity:.6;font-size:.7rem}
-.fgroup input,.fgroup textarea{width:100%;background:rgba(5,150,105,0.04);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;color:var(--lt);font-family:'Tajawal',sans-serif;font-size:.92rem;outline:none;transition:.3s;direction:rtl}
-.fgroup input:focus,.fgroup textarea:focus{border-color:rgba(5,150,105,0.5);background:rgba(5,150,105,0.06);box-shadow:0 0 0 3px rgba(5,150,105,0.08)}
+.fgroup input,.fgroup textarea{width:100%;background:rgba(5,150,105,.04);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;color:var(--lt);font-family:'Tajawal','Outfit',sans-serif;font-size:.92rem;outline:none;transition:.3s}
+body.en .fgroup input,body.en .fgroup textarea{font-family:'Outfit','Tajawal',sans-serif;direction:ltr}
+.fgroup input:focus,.fgroup textarea:focus{border-color:rgba(5,150,105,.5);background:rgba(5,150,105,.06);box-shadow:0 0 0 3px rgba(5,150,105,.08)}
 .fgroup textarea{min-height:120px;resize:vertical}
-.submit-btn{width:100%;background:linear-gradient(135deg,var(--p),var(--p2));color:white;border:none;border-radius:8px;padding:1.05rem;font-family:'Tajawal',sans-serif;font-size:.97rem;font-weight:800;cursor:pointer;transition:.3s;position:relative;z-index:1;box-shadow:0 0 25px rgba(5,150,105,0.2);overflow:hidden}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--p),var(--p2));color:white;border:none;border-radius:8px;padding:1.05rem;font-size:.97rem;font-weight:800;cursor:pointer;transition:.3s;position:relative;z-index:1;box-shadow:0 0 25px rgba(5,150,105,.2);overflow:hidden}
 .submit-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.1);border-radius:50%;transform:translate(-50%,-50%);transition:.5s}
 .submit-btn:hover::before{width:500px;height:500px}
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 45px rgba(5,150,105,.4)}
 
-/* ===== LAUNCH SECTION ===== */
+/* LAUNCH SECTION */
 #launch{position:relative;z-index:1;overflow:hidden}
 .launch-bg{position:absolute;inset:0;pointer-events:none}
 .launch-bg-orb{position:absolute;border-radius:50%}
-.lbo1{width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,0.05),transparent 70%);top:-200px;right:-100px}
-.lbo2{width:400px;height:400px;background:radial-gradient(circle,rgba(5,150,105,0.07),transparent 70%);bottom:-100px;left:-100px}
-.launch-section-inner{max-width:1100px;margin:0 auto;padding:7rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.launch-eyebrow{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(212,175,55,0.12),rgba(5,150,105,0.08));border:1px solid rgba(212,175,55,0.22);color:#fde68a;padding:.38rem 1.1rem;border-radius:30px;font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.8rem}
-.launch-title{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:900;line-height:1.1;margin-bottom:.5rem}
-.launch-title-en{font-family:'Outfit';font-size:clamp(.9rem,2vw,1.2rem);font-weight:300;color:rgba(255,255,255,.12);margin-bottom:1.2rem;direction:ltr}
+.lbo1{width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,.05),transparent 70%);top:-200px;right:-100px}
+.lbo2{width:400px;height:400px;background:radial-gradient(circle,rgba(5,150,105,.07),transparent 70%);bottom:-100px;left:-100px}
+.launch-inner{max-width:1100px;margin:0 auto;padding:7rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.launch-eyebrow{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(5,150,105,.08));border:1px solid rgba(212,175,55,.22);color:#fde68a;padding:.38rem 1.1rem;border-radius:30px;font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.8rem;font-family:'Outfit'}
+.launch-title{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem}
 .gold-text{background:linear-gradient(135deg,#fcd34d,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .emerald-text{background:linear-gradient(135deg,var(--p3),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.launch-desc{font-size:.93rem;color:rgba(255,255,255,.4);line-height:2;margin-bottom:2rem}
+.launch-desc{font-size:.93rem;color:rgba(255,255,255,.42);line-height:2;margin-bottom:2rem}
 .launch-perks{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem}
 .launch-perk{display:flex;align-items:center;gap:.9rem;font-size:.86rem;color:rgba(255,255,255,.55)}
-.launch-perk .en{font-family:'Outfit';font-size:.77rem;color:rgba(255,255,255,.2);display:block;direction:ltr}
-.perk-icon{width:26px;height:26px;border-radius:7px;background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.2);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;color:var(--p3)}
-.btn-launch{background:linear-gradient(135deg,var(--gold),#b45309);color:#1c1000;padding:.9rem 2.2rem;border-radius:8px;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:.93rem;font-weight:900;transition:.3s;box-shadow:0 0 30px rgba(212,175,55,0.2)}
+.perk-icon{width:26px;height:26px;border-radius:7px;background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.2);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;color:var(--p3)}
+.btn-launch{background:linear-gradient(135deg,var(--gold),#b45309);color:#1c1000;padding:.9rem 2.2rem;border-radius:8px;border:none;cursor:pointer;font-size:.93rem;font-weight:900;transition:.3s;box-shadow:0 0 30px rgba(212,175,55,.2)}
 .btn-launch:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(212,175,55,.4)}
-.launch-card{background:linear-gradient(145deg,rgba(5,150,105,0.08),rgba(13,148,136,0.04));border:1px solid rgba(5,150,105,0.18);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden}
-.launch-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(5,150,105,0.1),transparent 60%),radial-gradient(circle at 80% 80%,rgba(212,175,55,0.06),transparent 60%)}
-.launch-card-title{font-size:.68rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;position:relative;z-index:1}
-.launch-card-title .en{font-family:'Outfit';opacity:.7}
+.launch-card{background:linear-gradient(145deg,rgba(5,150,105,.08),rgba(13,148,136,.04));border:1px solid rgba(5,150,105,.18);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden}
+.launch-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(5,150,105,.1),transparent 60%),radial-gradient(circle at 80% 80%,rgba(212,175,55,.06),transparent 60%)}
+.launch-card-title{font-size:.68rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;position:relative;z-index:1;font-family:'Outfit'}
 .offer-list{display:flex;flex-direction:column;gap:.9rem;position:relative;z-index:1;margin-bottom:2rem}
-.offer-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,0.025);border:1px solid var(--border2);border-radius:12px;transition:.3s}
-.offer-item:hover{background:rgba(5,150,105,0.06);border-color:rgba(5,150,105,0.2);transform:translateX(-4px)}
+.offer-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,.025);border:1px solid var(--border2);border-radius:12px;transition:.3s}
+.offer-item:hover{background:rgba(5,150,105,.06);border-color:rgba(5,150,105,.2);transform:translateX(-4px)}
+body.en .offer-item:hover{transform:translateX(4px)}
 .offer-num{font-family:'Outfit';font-size:1.3rem;font-weight:900;color:var(--p3);min-width:36px}
-.offer-info h4{font-size:.86rem;font-weight:700;margin-bottom:.1rem}
-.offer-info h4 .en{font-family:'Outfit';font-size:.7rem;font-weight:400;color:rgba(255,255,255,.2);direction:ltr;display:block}
+.offer-info h4{font-size:.86rem;font-weight:700;margin-bottom:.15rem}
 .offer-info p{font-size:.77rem;color:var(--muted)}
-.offer-check{margin-right:auto;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);display:flex;align-items:center;justify-content:center;font-size:.68rem;color:#34d399;flex-shrink:0}
+.offer-check{margin-right:auto;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);display:flex;align-items:center;justify-content:center;font-size:.68rem;color:#34d399;flex-shrink:0}
+body.en .offer-check{margin-right:0;margin-left:auto}
 .launch-timer-label{font-size:.68rem;color:var(--muted);letter-spacing:2px;text-align:center;margin-bottom:.7rem;position:relative;z-index:1;font-family:'Outfit'}
 .mini-countdown{display:flex;justify-content:center;gap:.5rem;position:relative;z-index:1}
 .mini-unit{text-align:center}
 .mini-num{font-family:'Outfit';font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--p3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.mini-label{font-size:.58rem;color:var(--muted);letter-spacing:1px}
-.mini-sep{color:rgba(5,150,105,0.35);font-size:1.2rem;align-self:flex-start;padding-top:2px}
+.mini-label{font-size:.58rem;color:var(--muted);letter-spacing:1px;font-family:'Outfit'}
+.mini-sep{color:rgba(5,150,105,.35);font-size:1.2rem;align-self:flex-start;padding-top:2px}
 
-/* ===== MARQUEE ===== */
-.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 0;position:relative;z-index:1;background:rgba(5,150,105,0.015)}
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 0;position:relative;z-index:1;background:rgba(5,150,105,.015)}
 .marquee-track{display:flex;gap:3rem;animation:marquee 28s linear infinite;width:max-content}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused}
-.marquee-item{white-space:nowrap;font-size:.72rem;color:rgba(255,255,255,.15);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:.8rem;font-weight:600}
+.marquee-item{white-space:nowrap;font-size:.72rem;color:rgba(255,255,255,.15);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:.8rem;font-weight:600;font-family:'Outfit'}
 .marquee-item::before{content:'✦';color:var(--p);opacity:.4}
-.marquee-item .en{font-family:'Outfit';opacity:.5}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{text-align:center;padding:3.5rem 2rem;border-top:1px solid var(--border);position:relative;z-index:1}
-.footer-logo-ar{font-family:'Amiri',serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--p3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.footer-logo-en{font-family:'Outfit';font-size:.85rem;font-weight:600;color:rgba(5,150,105,0.4);letter-spacing:4px;text-transform:uppercase;direction:ltr;display:block;margin-bottom:.5rem}
-.footer-tagline-ar{color:var(--muted);font-size:.85rem;margin:.3rem 0}
-.footer-tagline-en{font-family:'Outfit';color:rgba(255,255,255,.1);font-size:.72rem;direction:ltr;margin-bottom:2rem}
+.footer-logo-main{font-family:'Amiri',serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--p3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-logo-sub{font-family:'Outfit';font-size:.75rem;font-weight:600;color:rgba(5,150,105,.4);letter-spacing:4px;text-transform:uppercase;display:block;margin-bottom:.5rem}
+.footer-tagline{color:var(--muted);font-size:.85rem;margin:.3rem 0 2rem}
 .footer-contact-row{display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem}
-.footer-citem{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(255,255,255,.3);text-decoration:none;transition:.2s}
+.footer-citem{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(255,255,255,.25);text-decoration:none;transition:.2s;font-family:'Outfit'}
 .footer-citem:hover{color:var(--p3)}
-.footer-citem span{font-family:'Outfit';direction:ltr}
 .footer-divider{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--p),transparent);margin:0 auto 1.5rem}
 .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .footer-links a{color:rgba(255,255,255,.2);text-decoration:none;font-size:.8rem;transition:.2s}
 .footer-links a:hover{color:var(--p3)}
 .footer-copy{color:rgba(255,255,255,.08);font-size:.72rem;font-family:'Outfit'}
 
-/* ===== SEC DIVIDER ===== */
-.sec-divider{position:relative;z-index:1;background:rgba(5,150,105,0.015);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+/* SEC DIVIDER */
+.sec-divider{position:relative;z-index:1;background:rgba(5,150,105,.015);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 
-/* ===== NOISE OVERLAY ===== */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:.022;pointer-events:none;z-index:99997}
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.022;pointer-events:none;z-index:99997}
 
-/* ===== LANG MODE ===== */
-body.en-mode .ar{display:none}
-body.en-mode .en{display:block!important}
-body.en-mode{direction:ltr}
-body.en-mode nav{direction:ltr}
-body.en-mode .why-item:hover{transform:translateX(4px)}
-body.en-mode .acard:hover{transform:translateX(5px)}
-body.en-mode .clink:hover{transform:translateX(5px)}
-
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
-  .about-grid,.why-wrap,.contact-grid,.launch-section-inner{grid-template-columns:1fr;gap:2.5rem}
+  .about-grid,.why-wrap,.contact-grid,.launch-inner{grid-template-columns:1fr;gap:2.5rem}
   .nav-links{display:none}
-  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;right:0;left:0;background:rgba(2,12,10,0.98);border-bottom:1px solid var(--border);padding:1.5rem 2rem;gap:1.2rem;backdrop-filter:blur(20px)}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;right:0;left:0;background:rgba(2,12,10,.98);border-bottom:1px solid var(--border);padding:1.5rem 2rem;gap:1.2rem;backdrop-filter:blur(20px)}
   .hamburger{display:flex}
   nav{padding:1rem 1.5rem;position:relative}
-  .section{padding:5rem 1.5rem}
+  .section,.launch-inner{padding:5rem 1.5rem}
   .about-blob,.floating-badge{display:none}
   .contact-box{padding:2rem}
-  .launch-section-inner{padding:5rem 1.5rem}
-  #announce-bar{font-size:.68rem;gap:.6rem}
+  #announce-bar{font-size:.68rem}
   .popup-countdown{gap:.5rem}
   .countdown-num{width:50px;height:50px;font-size:1.4rem}
   .popup-btns{flex-direction:column}
@@ -408,59 +351,50 @@ body.en-mode .clink:hover{transform:translateX(5px)}
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="curRing"></div>
 
-<!-- ===== ANNOUNCE BAR ===== -->
+<!-- ANNOUNCE BAR -->
 <div id="announce-bar">
-  <span class="announce-badge">🚀 إطلاق رسمي · Official Launch</span>
-  <div class="announce-text">
-    <span>البيان تنطلق رسمياً</span>
-    <span class="announce-sep">·</span>
-    <span style="font-family:'Outfit';font-size:.72rem;opacity:.7">Al-Bayan is officially live</span>
-    <span class="announce-sep">·</span>
-    <a href="#contact" class="announce-link">احجز مجاناً / Book Free →</a>
-  </div>
+  <span class="announce-badge" data-i18n="bar_badge">🚀 إطلاق رسمي</span>
+  <span data-i18n="bar_text">البيان تنطلق رسمياً — استشارة مجانية لأول ١٠ عملاء</span>
+  <a href="#contact" style="color:rgba(255,255,255,.8);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);font-size:.72rem;white-space:nowrap" data-i18n="bar_cta">احجز الآن ←</a>
   <button class="announce-close" onclick="closeBar()">✕</button>
 </div>
 
-<!-- ===== POPUP ===== -->
+<!-- POPUP -->
 <div id="launch-overlay">
   <div class="launch-popup">
     <div class="popup-glow"></div><div class="popup-glow2"></div>
-    <span class="sparkle" style="top:8%;right:10%;--tx1:20px;--ty1:-30px;--tx2:40px;--ty2:-80px;animation-duration:3s;animation-delay:0s">✦</span>
+    <span class="sparkle" style="top:8%;right:10%;--tx1:20px;--ty1:-30px;--tx2:40px;--ty2:-80px;animation-duration:3s">✦</span>
     <span class="sparkle" style="top:18%;left:8%;--tx1:-20px;--ty1:-20px;--tx2:-50px;--ty2:-60px;animation-duration:3.5s;animation-delay:.5s">⭐</span>
     <span class="sparkle" style="bottom:18%;right:8%;--tx1:15px;--ty1:20px;--tx2:40px;--ty2:60px;animation-duration:4s;animation-delay:1s">✨</span>
     <span class="sparkle" style="bottom:10%;left:12%;--tx1:-10px;--ty1:15px;--tx2:-30px;--ty2:50px;animation-duration:3.2s;animation-delay:.3s">💫</span>
     <button class="popup-close" onclick="closePopup()">✕</button>
     <span class="popup-crown">🚀</span>
-    <div class="popup-badge"><span class="popup-badge-dot"></span>OFFICIAL LAUNCH · إطلاق رسمي</div>
-    <div class="popup-lang-line">AL-BAYAN SOFTWARE · البيان للبرمجيات</div>
-    <h2 class="popup-title">البيان تنطلق رسمياً<br>إلى العالم الرقمي!</h2>
-    <div class="popup-title-en" style="direction:ltr;font-family:'Outfit';font-size:.95rem;color:rgba(255,255,255,.18);margin-bottom:1.2rem">Al-Bayan officially enters the digital world</div>
-    <p class="popup-desc">استفد من عرض الإطلاق الحصري — استشارة مجانية + خصم ٢٠٪<br><span style="font-family:'Outfit';font-size:.8rem;opacity:.6">Exclusive launch offer — Free consultation + 20% off</span></p>
+    <div class="popup-badge"><span class="popup-badge-dot"></span><span data-i18n="popup_badge">OFFICIAL LAUNCH · إطلاق رسمي</span></div>
+    <h2 class="popup-title" data-i18n="popup_title">البيان تنطلق رسمياً إلى العالم الرقمي!</h2>
+    <p class="popup-desc" data-i18n="popup_desc">استفد من عرض الإطلاق الحصري — استشارة مجانية وخصم ٢٠٪ على أول مشروع لأول ١٠ عملاء فقط.</p>
     <div class="popup-countdown">
-      <div class="countdown-item"><div class="countdown-num" id="pd">07</div><div class="countdown-label">يوم / Day</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="pd">07</div><div class="countdown-label" data-i18n="cd_day">يوم</div></div>
       <span class="countdown-sep">:</span>
-      <div class="countdown-item"><div class="countdown-num" id="ph">00</div><div class="countdown-label">ساعة / Hr</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="ph">00</div><div class="countdown-label" data-i18n="cd_hr">ساعة</div></div>
       <span class="countdown-sep">:</span>
-      <div class="countdown-item"><div class="countdown-num" id="pm">00</div><div class="countdown-label">دقيقة / Min</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="pm">00</div><div class="countdown-label" data-i18n="cd_min">دقيقة</div></div>
       <span class="countdown-sep">:</span>
-      <div class="countdown-item"><div class="countdown-num" id="ps">00</div><div class="countdown-label">ثانية / Sec</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="ps">00</div><div class="countdown-label" data-i18n="cd_sec">ثانية</div></div>
     </div>
-    <div class="popup-offer"><span>🎁</span><span>عرض الإطلاق: <strong>استشارة مجانية + خصم ٢٠٪</strong> · <span style="font-family:'Outfit'">Free consult + 20% off</span></span></div>
+    <div class="popup-offer">🎁 <span data-i18n="popup_offer">عرض الإطلاق: <strong>استشارة مجانية + خصم ٢٠٪</strong> على أول مشروع</span></div>
     <div class="popup-btns">
-      <button class="popup-cta" onclick="closePopup();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">احجز الآن / Book Now ✦</button>
-      <button class="popup-skip" onclick="closePopup()">تصفح أولاً / Browse first</button>
+      <button class="popup-cta" data-i18n="popup_cta" onclick="closePopup();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">احجز استشارتك المجانية ✦</button>
+      <button class="popup-skip" data-i18n="popup_skip" onclick="closePopup()">تصفح الموقع أولاً</button>
     </div>
   </div>
 </div>
 
-<!-- ===== LOADING SCREEN ===== -->
+<!-- LOADER -->
 <div id="loader">
-  <div class="loader-bg"></div>
-  <div class="loader-grid"></div>
+  <div class="loader-bg"></div><div class="loader-grid"></div>
   <div class="loader-particles" id="loaderParticles"></div>
   <div class="loader-rings">
     <div class="ring ring1"></div><div class="ring ring2"></div>
@@ -468,466 +402,486 @@ body.en-mode .clink:hover{transform:translateX(5px)}
     <div class="loader-center">✦</div>
   </div>
   <div class="loader-logo">البيان</div>
-  <div class="loader-sub-ar">حلول برمجية ذكية</div>
-  <div class="loader-sub-en">Smart Software Solutions</div>
+  <div class="loader-tagline">AL-BAYAN · SMART SOFTWARE</div>
   <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
   <div class="loader-pct" id="loaderPct">0%</div>
 </div>
 
 <canvas id="canvas"></canvas>
 
-<!-- ===== NAV ===== -->
+<!-- NAV -->
 <nav id="mainNav">
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <span class="logo-ar">البيان</span>
-    <span class="logo-en">Al-Bayan</span>
+  <div class="logo-wrap" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <span class="logo-main" data-i18n="logo_main">البيان</span>
+    <span class="logo-sub">Al-Bayan Software</span>
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#services"><span class="ar">الخدمات</span><span class="en" style="display:none">Services</span></a></li>
-    <li><a href="#work"><span class="ar">الأعمال</span><span class="en" style="display:none">Portfolio</span></a></li>
-    <li><a href="#about"><span class="ar">من نحن</span><span class="en" style="display:none">About</span></a></li>
-    <li><a href="#contact"><span class="ar">تواصل</span><span class="en" style="display:none">Contact</span></a></li>
+    <li><a href="#services" data-i18n="nav_services">الخدمات</a></li>
+    <li><a href="#work" data-i18n="nav_work">الأعمال</a></li>
+    <li><a href="#about" data-i18n="nav_about">من نحن</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">تواصل</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:.8rem">
-    <div class="lang-switch" title="Switch Language">
+  <div class="nav-right">
+    <div class="lang-switch">
       <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">ع</button>
       <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
     </div>
-    <a href="#contact" class="nav-btn"><span class="ar">ابدأ مشروعك ✦</span><span class="en" style="display:none">Start Project ✦</span></a>
+    <a href="#contact" class="nav-btn" data-i18n="nav_btn">ابدأ مشروعك ✦</a>
     <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-orb1"></div><div class="hero-orb2"></div><div class="hero-orb3"></div>
-  <div class="hero-tag"><span class="dot"></span> <span class="ar">حلول برمجية ذكية</span><span class="en" style="display:none">Smart Software Solutions</span></div>
-  <div class="hero-sub-en">We Build. You Grow.</div>
+  <div class="hero-tag"><span class="dot"></span> <span data-i18n="hero_tag">حلول برمجية ذكية</span></div>
   <h1 class="main">
-    <span class="ar">نبني تطبيقات</span><span class="en" style="display:none">We Build Apps</span>
-    <span class="grad-text"><span class="ar">تصنع المستقبل</span><span class="en" style="display:none">That Shape the Future</span></span>
+    <span data-i18n="hero_h1_line1">نبني تطبيقات</span>
+    <span class="grad-text" data-i18n="hero_h1_line2">تصنع المستقبل</span>
   </h1>
-  <p class="hero-desc">
-    <span class="ar">في البيان، نحوّل أفكارك إلى منتجات رقمية قوية تدفع أعمالك للأمام وتحقق نتائج حقيقية تراها.</span>
-    <span class="en" style="display:none">At Al-Bayan, we transform your ideas into powerful digital products that drive your business forward and deliver real, measurable results.</span>
-  </p>
+  <p class="hero-desc" data-i18n="hero_desc">في البيان، نحوّل أفكارك إلى منتجات رقمية قوية تدفع أعمالك للأمام وتحقق نتائج حقيقية تراها.</p>
   <div class="hero-btns">
-    <button class="btn-glow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      <span class="ar">ابدأ الآن ✦</span><span class="en" style="display:none">Get Started ✦</span>
-    </button>
-    <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-      <span class="ar">اكتشف خدماتنا</span><span class="en" style="display:none">Explore Services</span>
-    </button>
+    <button class="btn-glow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i18n="hero_btn1">ابدأ الآن ✦</button>
+    <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-i18n="hero_btn2">اكتشف خدماتنا</button>
   </div>
-  <div class="scroll-hint">
-    <p><span class="ar">اكتشف</span><span class="en" style="display:none">Scroll</span></p>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-hint"><p data-i18n="scroll_hint">اكتشف</p><div class="scroll-line"></div></div>
 </div>
 
-<!-- ===== STATS ===== -->
+<!-- STATS -->
 <div class="stats-bar">
-  <div class="stat reveal">
-    <span class="stat-n" data-count="50">0</span>
-    <div class="stat-l-ar">مشروع منجز</div><div class="stat-l-en">Projects Delivered</div>
-  </div>
-  <div class="stat reveal" style="transition-delay:.1s">
-    <span class="stat-n" data-count="30">0</span>
-    <div class="stat-l-ar">عميل سعيد</div><div class="stat-l-en">Happy Clients</div>
-  </div>
-  <div class="stat reveal" style="transition-delay:.2s">
-    <span class="stat-n" data-count="5">0</span>
-    <div class="stat-l-ar">سنوات خبرة</div><div class="stat-l-en">Years Experience</div>
-  </div>
-  <div class="stat reveal" style="transition-delay:.3s">
-    <span class="stat-n" data-count="98">0</span>
-    <div class="stat-l-ar">نسبة الرضا</div><div class="stat-l-en">Satisfaction Rate</div>
-  </div>
+  <div class="stat reveal"><span class="stat-n" data-count="50">0</span><div class="stat-label" data-i18n="stat1">مشروع منجز</div></div>
+  <div class="stat reveal" style="transition-delay:.1s"><span class="stat-n" data-count="30">0</span><div class="stat-label" data-i18n="stat2">عميل سعيد</div></div>
+  <div class="stat reveal" style="transition-delay:.2s"><span class="stat-n" data-count="5">0</span><div class="stat-label" data-i18n="stat3">سنوات خبرة</div></div>
+  <div class="stat reveal" style="transition-delay:.3s"><span class="stat-n" data-count="98">0</span><div class="stat-label" data-i18n="stat4">نسبة الرضا</div></div>
 </div>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">تطبيقات موبايل <span class="en">Mobile Apps</span></span>
-    <span class="marquee-item">تصميم UI/UX</span>
-    <span class="marquee-item">تطوير ويب <span class="en">Web Dev</span></span>
-    <span class="marquee-item">ذكاء اصطناعي <span class="en">AI Solutions</span></span>
-    <span class="marquee-item">جودة عالية <span class="en">High Quality</span></span>
-    <span class="marquee-item">دعم مستمر <span class="en">Ongoing Support</span></span>
-    <span class="marquee-item">تطبيقات موبايل <span class="en">Mobile Apps</span></span>
-    <span class="marquee-item">تصميم UI/UX</span>
-    <span class="marquee-item">تطوير ويب <span class="en">Web Dev</span></span>
-    <span class="marquee-item">ذكاء اصطناعي <span class="en">AI Solutions</span></span>
-    <span class="marquee-item">جودة عالية <span class="en">High Quality</span></span>
-    <span class="marquee-item">دعم مستمر <span class="en">Ongoing Support</span></span>
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">تطبيقات موبايل</span><span class="marquee-item">تصميم UI/UX</span>
+    <span class="marquee-item">تطوير ويب</span><span class="marquee-item">ذكاء اصطناعي</span>
+    <span class="marquee-item">جودة عالية</span><span class="marquee-item">دعم مستمر</span>
+    <span class="marquee-item">تطبيقات موبايل</span><span class="marquee-item">تصميم UI/UX</span>
+    <span class="marquee-item">تطوير ويب</span><span class="marquee-item">ذكاء اصطناعي</span>
+    <span class="marquee-item">جودة عالية</span><span class="marquee-item">دعم مستمر</span>
   </div>
 </div>
 
-<!-- ===== SERVICES ===== -->
+<!-- SERVICES -->
 <div id="services" style="position:relative;z-index:1">
 <div class="section">
-  <div class="sec-eyebrow reveal">خدماتنا <span class="en">/ Services</span></div>
-  <h2 class="sec-title reveal">ماذا <em>نقدم</em> لك؟</h2>
-  <div class="sec-title-en reveal">What do we offer?</div>
-  <p class="sec-sub reveal">حلول برمجية متكاملة تحول أفكارك إلى منتجات رقمية ناجحة.</p>
-  <p class="sec-sub-en reveal">Full-stack software solutions that transform your ideas into successful digital products.</p>
+  <div class="sec-eyebrow reveal" data-i18n="srv_eyebrow">خدماتنا</div>
+  <h2 class="sec-title reveal"><span data-i18n="srv_title_1">ماذا </span><em data-i18n="srv_title_em">نقدم</em><span data-i18n="srv_title_2"> لك؟</span></h2>
+  <p class="sec-sub reveal" data-i18n="srv_sub">حلول برمجية متكاملة تحول أفكارك إلى منتجات رقمية ناجحة تتجاوز توقعاتك.</p>
   <div class="services-grid">
     <div class="scard reveal" style="transition-delay:.05s">
       <div class="scard-shimmer"></div><div class="scard-glow gc1"></div>
       <div class="scard-icon ic1">📱</div>
-      <h3>تطبيقات الموبايل<span class="en">Mobile Applications</span></h3>
-      <p><span class="ar">نصمم ونبني تطبيقات iOS وAndroid بأداء استثنائي وتجربة مستخدم لا تُنسى.</span><span class="en" style="display:none">We design and build iOS & Android apps with exceptional performance and unforgettable UX.</span></p>
-      <span class="scard-arrow"><span class="ar">اكتشف أكثر ←</span><span class="en" style="display:none">Learn more →</span></span>
+      <h3 data-i18n="s1_title">تطبيقات الموبايل</h3>
+      <p data-i18n="s1_desc">نصمم ونبني تطبيقات iOS وAndroid بأداء استثنائي وتجربة مستخدم لا تُنسى.</p>
+      <span class="scard-arrow" data-i18n="learn_more">اكتشف أكثر ←</span>
     </div>
     <div class="scard reveal" style="transition-delay:.1s">
       <div class="scard-shimmer"></div><div class="scard-glow gc2"></div>
       <div class="scard-icon ic2">🌐</div>
-      <h3>تطبيقات الويب<span class="en">Web Applications</span></h3>
-      <p><span class="ar">أنظمة ويب سريعة ومتكاملة مبنية بأحدث التقنيات لتدعم نمو أعمالك.</span><span class="en" style="display:none">Fast, scalable web systems built with the latest technologies to support your business growth.</span></p>
-      <span class="scard-arrow"><span class="ar">اكتشف أكثر ←</span><span class="en" style="display:none">Learn more →</span></span>
+      <h3 data-i18n="s2_title">تطبيقات الويب</h3>
+      <p data-i18n="s2_desc">أنظمة ويب سريعة ومتكاملة مبنية بأحدث التقنيات لتدعم نمو أعمالك.</p>
+      <span class="scard-arrow" data-i18n="learn_more">اكتشف أكثر ←</span>
     </div>
     <div class="scard reveal" style="transition-delay:.15s">
       <div class="scard-shimmer"></div><div class="scard-glow gc3"></div>
       <div class="scard-icon ic3">🎨</div>
-      <h3>تصميم UI/UX<span class="en">UI/UX Design</span></h3>
-      <p><span class="ar">تصاميم عصرية مبهرة تركز على تجربة المستخدم وتحوّل الزوار إلى عملاء.</span><span class="en" style="display:none">Modern, stunning designs focused on UX that convert visitors into loyal customers.</span></p>
-      <span class="scard-arrow"><span class="ar">اكتشف أكثر ←</span><span class="en" style="display:none">Learn more →</span></span>
+      <h3 data-i18n="s3_title">تصميم UI/UX</h3>
+      <p data-i18n="s3_desc">تصاميم عصرية مبهرة تركز على تجربة المستخدم وتحوّل الزوار إلى عملاء.</p>
+      <span class="scard-arrow" data-i18n="learn_more">اكتشف أكثر ←</span>
     </div>
     <div class="scard reveal" style="transition-delay:.2s">
       <div class="scard-shimmer"></div><div class="scard-glow gc4"></div>
       <div class="scard-icon ic4">🛡️</div>
-      <h3>صيانة ودعم<span class="en">Maintenance & Support</span></h3>
-      <p><span class="ar">نرافقك بعد الإطلاق بدعم مستمر وتحديثات دورية تضمن استقرار منتجك.</span><span class="en" style="display:none">We stay with you post-launch with continuous support and updates to ensure product stability.</span></p>
-      <span class="scard-arrow"><span class="ar">اكتشف أكثر ←</span><span class="en" style="display:none">Learn more →</span></span>
+      <h3 data-i18n="s4_title">صيانة ودعم</h3>
+      <p data-i18n="s4_desc">نرافقك بعد الإطلاق بدعم مستمر وتحديثات دورية تضمن استقرار منتجك.</p>
+      <span class="scard-arrow" data-i18n="learn_more">اكتشف أكثر ←</span>
     </div>
   </div>
   <div class="tech-list reveal" style="transition-delay:.3s">
-    <span class="tech-pill">React</span><span class="tech-pill">Flutter</span><span class="tech-pill">Node.js</span><span class="tech-pill">Vue.js</span><span class="tech-pill">Firebase</span><span class="tech-pill">Python</span><span class="tech-pill">Next.js</span><span class="tech-pill">TypeScript</span>
+    <span class="tech-pill">React</span><span class="tech-pill">Flutter</span><span class="tech-pill">Node.js</span>
+    <span class="tech-pill">Vue.js</span><span class="tech-pill">Firebase</span><span class="tech-pill">Python</span>
+    <span class="tech-pill">Next.js</span><span class="tech-pill">TypeScript</span>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- ===== WHY ===== -->
+<!-- WHY -->
 <div class="sec-divider">
 <div class="section">
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
     <div class="reveal-l">
-      <div class="sec-eyebrow">لماذا نحن <span class="en">/ Why Us</span></div>
-      <h2 class="sec-title">لماذا تختار <em>البيان</em>؟</h2>
-      <div class="sec-title-en">Why choose Al-Bayan?</div>
-      <p class="sec-sub" style="margin-bottom:0">نلتزم بجودة لا تقبل المساومة في كل مشروع نضع عليه بصمتنا.</p>
-      <p class="sec-sub-en" style="margin-bottom:0">We commit to uncompromising quality in every project we touch.</p>
+      <div class="sec-eyebrow" data-i18n="why_eyebrow">لماذا نحن</div>
+      <h2 class="sec-title"><span data-i18n="why_title_1">لماذا تختار </span><em data-i18n="why_title_em">البيان</em><span data-i18n="why_title_2">؟</span></h2>
+      <p class="sec-sub" style="margin-bottom:0" data-i18n="why_sub">نلتزم بجودة لا تقبل المساومة في كل مشروع نضع عليه بصمتنا.</p>
     </div>
     <div class="why-wrap reveal-r">
-      <div class="why-item">
-        <div class="why-icon">⚡</div>
-        <div><h4>سرعة التنفيذ<span class="en">Fast Delivery</span></h4><p><span class="ar">نلتزم بالمواعيد دون تأخير</span><span class="en" style="display:none">On-time, every time</span></p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon">💎</div>
-        <div><h4>جودة عالية<span class="en">Premium Quality</span></h4><p><span class="ar">أحدث التقنيات وأفضل الممارسات</span><span class="en" style="display:none">Latest tech, best practices</span></p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon">🎯</div>
-        <div><h4>حلول مخصصة<span class="en">Tailored Solutions</span></h4><p><span class="ar">كل مشروع فريد حسب احتياجك</span><span class="en" style="display:none">Every project built for your needs</span></p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon">🤝</div>
-        <div><h4>دعم مستمر<span class="en">Ongoing Support</span></h4><p><span class="ar">معك بعد الإطلاق لضمان النجاح</span><span class="en" style="display:none">With you after launch for success</span></p></div>
-      </div>
+      <div class="why-item"><div class="why-icon">⚡</div><div><h4 data-i18n="w1_title">سرعة التنفيذ</h4><p data-i18n="w1_desc">نلتزم بالمواعيد دون تأخير</p></div></div>
+      <div class="why-item"><div class="why-icon">💎</div><div><h4 data-i18n="w2_title">جودة عالية</h4><p data-i18n="w2_desc">أحدث التقنيات وأفضل الممارسات</p></div></div>
+      <div class="why-item"><div class="why-icon">🎯</div><div><h4 data-i18n="w3_title">حلول مخصصة</h4><p data-i18n="w3_desc">كل مشروع فريد حسب احتياجك</p></div></div>
+      <div class="why-item"><div class="why-icon">🤝</div><div><h4 data-i18n="w4_title">دعم مستمر</h4><p data-i18n="w4_desc">معك بعد الإطلاق لضمان النجاح</p></div></div>
     </div>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- ===== PORTFOLIO ===== -->
+<!-- PORTFOLIO -->
 <div id="work" style="position:relative;z-index:1">
 <div class="section">
-  <div class="sec-eyebrow reveal">أعمالنا <span class="en">/ Portfolio</span></div>
-  <h2 class="sec-title reveal">مشاريع <em>نفخر</em> بها</h2>
-  <div class="sec-title-en reveal">Projects We're Proud Of</div>
-  <p class="sec-sub reveal">نماذج من إبداعاتنا التي أحدثت فرقاً حقيقياً لعملائنا.</p>
-  <p class="sec-sub-en reveal">A glimpse of our work that made a real difference for our clients.</p>
+  <div class="sec-eyebrow reveal" data-i18n="pf_eyebrow">أعمالنا</div>
+  <h2 class="sec-title reveal"><span data-i18n="pf_title_1">مشاريع </span><em data-i18n="pf_title_em">نفخر</em><span data-i18n="pf_title_2"> بها</span></h2>
+  <p class="sec-sub reveal" data-i18n="pf_sub">نماذج من إبداعاتنا التي أحدثت فرقاً حقيقياً لعملائنا.</p>
   <div class="portfolio-grid">
     <div class="pcard reveal" style="transition-delay:.05s">
-      <span class="pcard-view">View Project ↗</span>
+      <span class="pcard-view" data-i18n="view_proj">عرض المشروع ↗</span>
       <div class="pthumb pt1">🛒</div>
-      <div class="pbody">
-        <h3>منصة تجارة إلكترونية<span class="en">E-Commerce Platform</span></h3>
-        <p><span class="ar">متجر متكامل مع لوحة تحكم ذكية ونظام دفع آمن متعدد العملات.</span><span class="en" style="display:none">A full-featured store with smart dashboard and secure multi-currency payment system.</span></p>
-        <div class="ptags"><span class="ptag">React</span><span class="ptag">Node.js</span><span class="ptag">Web</span></div>
-      </div>
+      <div class="pbody"><h3 data-i18n="p1_title">منصة تجارة إلكترونية</h3><p data-i18n="p1_desc">متجر متكامل مع لوحة تحكم ذكية ونظام دفع آمن متعدد العملات.</p><div class="ptags"><span class="ptag">React</span><span class="ptag">Node.js</span><span class="ptag" data-i18n="web_tag">ويب</span></div></div>
     </div>
     <div class="pcard reveal" style="transition-delay:.1s">
-      <span class="pcard-view">View Project ↗</span>
+      <span class="pcard-view" data-i18n="view_proj">عرض المشروع ↗</span>
       <div class="pthumb pt2">🏥</div>
-      <div class="pbody">
-        <h3>تطبيق حجز طبي<span class="en">Medical Booking App</span></h3>
-        <p><span class="ar">تطبيق موبايل لإدارة المواعيد بين المرضى والأطباء بذكاء.</span><span class="en" style="display:none">A mobile app for smart appointment management between patients and doctors.</span></p>
-        <div class="ptags"><span class="ptag">Flutter</span><span class="ptag">Firebase</span><span class="ptag">Mobile</span></div>
-      </div>
+      <div class="pbody"><h3 data-i18n="p2_title">تطبيق حجز طبي</h3><p data-i18n="p2_desc">تطبيق موبايل لإدارة المواعيد بين المرضى والأطباء بذكاء.</p><div class="ptags"><span class="ptag">Flutter</span><span class="ptag">Firebase</span><span class="ptag" data-i18n="mob_tag">موبايل</span></div></div>
     </div>
     <div class="pcard reveal" style="transition-delay:.15s">
-      <span class="pcard-view">View Project ↗</span>
+      <span class="pcard-view" data-i18n="view_proj">عرض المشروع ↗</span>
       <div class="pthumb pt3">📊</div>
-      <div class="pbody">
-        <h3>داشبورد تحليلي<span class="en">Analytics Dashboard</span></h3>
-        <p><span class="ar">لوحة بيانات متقدمة لاتخاذ قرارات مبنية على الأرقام الحقيقية.</span><span class="en" style="display:none">Advanced data dashboard for data-driven decision making based on real metrics.</span></p>
-        <div class="ptags"><span class="ptag">Vue.js</span><span class="ptag">Python</span><span class="ptag">Web</span></div>
-      </div>
+      <div class="pbody"><h3 data-i18n="p3_title">داشبورد تحليلي</h3><p data-i18n="p3_desc">لوحة بيانات متقدمة لاتخاذ قرارات مبنية على الأرقام الحقيقية.</p><div class="ptags"><span class="ptag">Vue.js</span><span class="ptag">Python</span><span class="ptag" data-i18n="web_tag">ويب</span></div></div>
     </div>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- ===== ABOUT ===== -->
+<!-- ABOUT -->
 <div id="about" class="sec-divider">
 <div class="section">
   <div class="about-grid">
     <div class="reveal-l">
-      <div class="sec-eyebrow">من نحن <span class="en">/ About Us</span></div>
-      <h2 class="sec-title">شريكك في <em>النجاح الرقمي</em></h2>
-      <div class="sec-title-en">Your Partner in Digital Success</div>
-      <p style="color:rgba(255,255,255,.42);line-height:2;font-size:.95rem;margin-bottom:.8rem">
-        <span class="ar">البيان شركة برمجية متخصصة في بناء التطبيقات الحديثة، نمكّن الشركات من التحول الرقمي بحلول مبتكرة وفعّالة.</span>
-        <span class="en" style="display:none">Al-Bayan is a specialized software company focused on building modern applications, empowering businesses to achieve digital transformation through innovative and effective solutions.</span>
-      </p>
-      <p style="color:var(--muted);line-height:1.9;font-size:.88rem;margin-bottom:1.5rem">
-        <span class="ar">فريقنا يعمل بشغف حقيقي لتحويل كل فكرة إلى منتج يصنع فرقاً ملموساً.</span>
-        <span class="en" style="display:none">Our team works with genuine passion to turn every idea into a product that makes a tangible difference.</span>
-      </p>
+      <div class="sec-eyebrow" data-i18n="ab_eyebrow">من نحن</div>
+      <h2 class="sec-title"><span data-i18n="ab_title_1">شريكك في </span><em data-i18n="ab_title_em">النجاح الرقمي</em></h2>
+      <p style="color:rgba(255,255,255,.42);line-height:2;font-size:.95rem;margin-bottom:.8rem" data-i18n="ab_p1">البيان شركة برمجية متخصصة في بناء التطبيقات الحديثة، نمكّن الشركات من التحول الرقمي بحلول مبتكرة وفعّالة.</p>
+      <p style="color:var(--muted);line-height:1.9;font-size:.88rem;margin-bottom:1.5rem" data-i18n="ab_p2">فريقنا يعمل بشغف حقيقي لتحويل كل فكرة إلى منتج يصنع فرقاً ملموساً.</p>
       <div class="about-cards-v">
-        <div class="acard ac1"><h4>رؤيتنا <span class="en">· Vision</span></h4><p><span class="ar">أن نكون الشريك الأول لكل شركة تسعى للنجاح الرقمي.</span><span class="en" style="display:none">To be the go-to partner for every company seeking digital success.</span></p></div>
-        <div class="acard ac2"><h4>مهمتنا <span class="en">· Mission</span></h4><p><span class="ar">تحويل الأفكار إلى منتجات رقمية ناجحة تتجاوز التوقعات.</span><span class="en" style="display:none">Transforming ideas into successful digital products that exceed expectations.</span></p></div>
-        <div class="acard ac3"><h4>قيمنا <span class="en">· Values</span></h4><p><span class="ar">الجودة — الالتزام — الابتكار — الشفافية الكاملة.</span><span class="en" style="display:none">Quality — Commitment — Innovation — Full Transparency.</span></p></div>
+        <div class="acard ac1"><h4 data-i18n="ab_v_title">رؤيتنا</h4><p data-i18n="ab_v_desc">أن نكون الشريك الأول لكل شركة تسعى للنجاح الرقمي.</p></div>
+        <div class="acard ac2"><h4 data-i18n="ab_m_title">مهمتنا</h4><p data-i18n="ab_m_desc">تحويل الأفكار إلى منتجات رقمية ناجحة تتجاوز التوقعات.</p></div>
+        <div class="acard ac3"><h4 data-i18n="ab_val_title">قيمنا</h4><p data-i18n="ab_val_desc">الجودة — الالتزام — الابتكار — الشفافية الكاملة.</p></div>
       </div>
     </div>
     <div class="reveal-r" style="position:relative">
       <div class="about-blob"><div class="about-blob-inner">💡</div></div>
-      <div class="floating-badge fb1"><div class="fb-num">+50</div><div class="fb-text">مشروع · Projects</div></div>
-      <div class="floating-badge fb2"><div class="fb-num">98%</div><div class="fb-text">رضا العملاء · Satisfaction</div></div>
+      <div class="floating-badge fb1"><div class="fb-num">+50</div><div class="fb-text" data-i18n="fb1_text">مشروع ناجح</div></div>
+      <div class="floating-badge fb2"><div class="fb-num">98%</div><div class="fb-text" data-i18n="fb2_text">رضا العملاء</div></div>
     </div>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- ===== LAUNCH SECTION ===== -->
+<!-- LAUNCH -->
 <div id="launch" class="sec-divider" style="border:none">
   <div class="launch-bg"><div class="launch-bg-orb lbo1"></div><div class="launch-bg-orb lbo2"></div></div>
-  <div class="launch-section-inner">
-    <div class="launch-left reveal-l">
-      <div class="launch-eyebrow">👑 إطلاق رسمي · Official Launch</div>
-      <h2 class="launch-title">اليوم نبدأ<br><span class="gold-text">رحلة النجاح</span><br><span class="emerald-text">الرقمي معاً</span></h2>
-      <div class="launch-title-en">Today we begin the journey to digital excellence — together</div>
-      <p class="launch-desc">
-        <span class="ar">بعد سنوات من الخبرة والشغف، وصلنا اليوم لنقدم لك أفضل ما في عالم التقنية.</span>
-        <span class="en" style="display:none">After years of experience and passion, we arrive today to deliver the best the tech world has to offer.</span>
-      </p>
+  <div class="launch-inner">
+    <div class="reveal-l">
+      <div class="launch-eyebrow" data-i18n="lnch_eyebrow">👑 إطلاق رسمي حصري</div>
+      <h2 class="launch-title">
+        <span data-i18n="lnch_t1">اليوم نبدأ</span><br>
+        <span class="gold-text" data-i18n="lnch_t2">رحلة النجاح</span><br>
+        <span class="emerald-text" data-i18n="lnch_t3">الرقمي معاً</span>
+      </h2>
+      <p class="launch-desc" data-i18n="lnch_desc">بعد سنوات من الخبرة والشغف، وصلنا اليوم لنقدم لك أفضل ما في عالم التقنية. البيان لم تُبنَ فقط لتصنع تطبيقات — بُنيت لتصنع قصص نجاح.</p>
       <div class="launch-perks">
-        <div class="launch-perk"><div class="perk-icon">✓</div><div><span class="ar">فريق من خبراء تقنيين محترفين</span><span class="en" style="display:none">A team of professional tech experts</span></div></div>
-        <div class="launch-perk"><div class="perk-icon">✓</div><div><span class="ar">منهجية عمل مثبتة النتائج</span><span class="en" style="display:none">Proven, results-driven methodology</span></div></div>
-        <div class="launch-perk"><div class="perk-icon">✓</div><div><span class="ar">دعم كامل من الفكرة حتى الإطلاق</span><span class="en" style="display:none">Full support from idea to launch</span></div></div>
-        <div class="launch-perk"><div class="perk-icon">✓</div><div><span class="ar">ضمان الجودة أو استرداد كامل</span><span class="en" style="display:none">Quality guarantee or full refund</span></div></div>
+        <div class="launch-perk"><div class="perk-icon">✓</div><span data-i18n="lp1">فريق من خبراء تقنيين محترفين</span></div>
+        <div class="launch-perk"><div class="perk-icon">✓</div><span data-i18n="lp2">منهجية عمل مثبتة النتائج</span></div>
+        <div class="launch-perk"><div class="perk-icon">✓</div><span data-i18n="lp3">دعم كامل من الفكرة حتى الإطلاق</span></div>
+        <div class="launch-perk"><div class="perk-icon">✓</div><span data-i18n="lp4">ضمان الجودة أو استرداد كامل</span></div>
       </div>
       <div style="display:flex;gap:.9rem;flex-wrap:wrap">
-        <button class="btn-launch" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><span class="ar">ابدأ مشروعك 🚀</span><span class="en" style="display:none">Start Your Project 🚀</span></button>
-        <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><span class="ar">اعرف أكثر</span><span class="en" style="display:none">Learn More</span></button>
+        <button class="btn-launch" data-i18n="lnch_btn1" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">ابدأ مشروعك 🚀</button>
+        <button class="btn-outline" data-i18n="lnch_btn2" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">اعرف أكثر</button>
       </div>
     </div>
     <div class="reveal-r">
       <div class="launch-card">
-        <div class="launch-card-title"><span class="ar">عروض الإطلاق الحصرية</span><span class="en" style="display:none">Exclusive Launch Offers</span></div>
+        <div class="launch-card-title" data-i18n="lnch_card_title">عروض الإطلاق الحصرية</div>
         <div class="offer-list">
           <div class="offer-item">
             <div class="offer-num">01</div>
-            <div class="offer-info">
-              <h4>استشارة مجانية ٦٠ دقيقة<span class="en">60-Min Free Consultation</span></h4>
-              <p><span class="ar">نحلل فكرتك ونضع خارطة طريق واضحة</span><span class="en" style="display:none">We analyze your idea and build a clear roadmap</span></p>
-            </div>
+            <div class="offer-info"><h4 data-i18n="o1_title">استشارة مجانية ٦٠ دقيقة</h4><p data-i18n="o1_desc">نحلل فكرتك ونضع خارطة طريق واضحة</p></div>
             <div class="offer-check">✓</div>
           </div>
           <div class="offer-item">
             <div class="offer-num">02</div>
-            <div class="offer-info">
-              <h4>خصم ٢٠٪ على أول مشروع<span class="en">20% Off First Project</span></h4>
-              <p><span class="ar">حصري لأول ١٠ عملاء يتعاقدون</span><span class="en" style="display:none">Exclusive for the first 10 clients</span></p>
-            </div>
+            <div class="offer-info"><h4 data-i18n="o2_title">خصم ٢٠٪ على أول مشروع</h4><p data-i18n="o2_desc">حصري لأول ١٠ عملاء يتعاقدون</p></div>
             <div class="offer-check">✓</div>
           </div>
           <div class="offer-item">
             <div class="offer-num">03</div>
-            <div class="offer-info">
-              <h4>نموذج أولي خلال ٧ أيام<span class="en">Prototype in 7 Days</span></h4>
-              <p><span class="ar">ترى شكل منتجك قبل أي التزام</span><span class="en" style="display:none">See your product before any commitment</span></p>
-            </div>
+            <div class="offer-info"><h4 data-i18n="o3_title">نموذج أولي خلال ٧ أيام</h4><p data-i18n="o3_desc">ترى شكل منتجك قبل أي التزام</p></div>
             <div class="offer-check">✓</div>
           </div>
         </div>
-        <div class="launch-timer-label">ينتهي العرض خلال · Offer ends in</div>
+        <div class="launch-timer-label" data-i18n="timer_label">ينتهي العرض خلال</div>
         <div class="mini-countdown">
-          <div class="mini-unit"><span class="mini-num" id="md">07</span><span class="mini-label">يوم/Day</span></div>
+          <div class="mini-unit"><span class="mini-num" id="md">07</span><span class="mini-label" data-i18n="cd_day">يوم</span></div>
           <span class="mini-sep">:</span>
-          <div class="mini-unit"><span class="mini-num" id="mh">00</span><span class="mini-label">ساعة/Hr</span></div>
+          <div class="mini-unit"><span class="mini-num" id="mh">00</span><span class="mini-label" data-i18n="cd_hr">ساعة</span></div>
           <span class="mini-sep">:</span>
-          <div class="mini-unit"><span class="mini-num" id="mm">00</span><span class="mini-label">دقيقة/Min</span></div>
+          <div class="mini-unit"><span class="mini-num" id="mm">00</span><span class="mini-label" data-i18n="cd_min">دقيقة</span></div>
           <span class="mini-sep">:</span>
-          <div class="mini-unit"><span class="mini-num" id="ms">00</span><span class="mini-label">ثانية/Sec</span></div>
+          <div class="mini-unit"><span class="mini-num" id="ms">00</span><span class="mini-label" data-i18n="cd_sec">ثانية</span></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== CONTACT ===== -->
+<!-- CONTACT -->
 <div id="contact" style="position:relative;z-index:1">
 <div class="section">
-  <div class="sec-eyebrow reveal" style="justify-content:center">تواصل معنا <span class="en">/ Contact Us</span></div>
-  <h2 class="sec-title reveal" style="text-align:center">هل لديك <em>فكرة مشروع</em>؟</h2>
-  <div class="sec-title-en reveal" style="text-align:center;direction:ltr;margin-bottom:1rem">Got a project idea? Let's build it together.</div>
-  <p style="text-align:center;color:var(--muted);font-size:.88rem;margin-bottom:3.5rem">
-    <span class="ar">نحن جاهزون لتحويل فكرتك إلى واقع مبهر</span>
-    <span class="en" style="display:none">We're ready to turn your vision into a stunning reality</span>
-  </p>
+  <div class="sec-eyebrow reveal" style="justify-content:center" data-i18n="ct_eyebrow">تواصل معنا</div>
+  <h2 class="sec-title reveal" style="text-align:center"><span data-i18n="ct_title_1">هل لديك </span><em data-i18n="ct_title_em">فكرة مشروع</em><span data-i18n="ct_title_2">؟</span></h2>
+  <p style="text-align:center;color:var(--muted);font-size:.88rem;margin-bottom:3.5rem" data-i18n="ct_sub">نحن جاهزون لتحويل فكرتك إلى واقع مبهر</p>
   <div class="contact-grid reveal">
-    <!-- Left: contact info -->
-    <div class="contact-info">
-      <div class="contact-info-title">
-        <span class="ar">تواصل مباشر</span><span class="en" style="display:none">Reach Us Directly</span>
-        <span class="en">Direct Contact</span>
-      </div>
-      <p class="contact-info-desc">
-        <span class="ar">تواصل معنا عبر أي وسيلة تفضلها — نرد خلال ساعات.</span>
-        <span class="en" style="display:none">Reach out through any channel you prefer — we respond within hours.</span>
-      </p>
-
-      <!-- Phone -->
-      <a class="clink" href="tel:+963987184299">
-        <div class="clink-icon cic-green">📞</div>
-        <div>
-          <div class="clink-val">+963 987 184 299</div>
-          <div class="clink-type">هاتف · Phone</div>
-        </div>
-      </a>
-
-      <!-- Email -->
-      <a class="clink" href="mailto:abd.jwad1746@gmail.com">
-        <div class="clink-icon cic-blue">✉️</div>
-        <div>
-          <div class="clink-val">abd.jwad1746@gmail.com</div>
-          <div class="clink-type">بريد إلكتروني · Email</div>
-        </div>
-      </a>
-
-      <!-- Telegram -->
-      <a class="clink" href="https://t.me/Abdalrhman_aljwad" target="_blank">
-        <div class="clink-icon cic-tg">✈️</div>
-        <div>
-          <div class="clink-val">@Abdalrhman_aljwad</div>
-          <div class="clink-type">تيليغرام · Telegram</div>
-        </div>
-      </a>
-
-      <!-- WhatsApp -->
-      <a class="clink" href="https://wa.me/963987184299" target="_blank">
-        <div class="clink-icon cic-wa">💬</div>
-        <div>
-          <div class="clink-val">+963 987 184 299</div>
-          <div class="clink-type">واتساب · WhatsApp</div>
-        </div>
-      </a>
-
-      <p style="font-size:.75rem;color:rgba(255,255,255,.15);margin-top:.5rem;font-family:'Outfit';direction:ltr">Response time: typically within 2–4 hours</p>
+    <div>
+      <div class="contact-info-title" data-i18n="ct_direct">تواصل مباشر</div>
+      <p class="contact-info-desc" data-i18n="ct_direct_sub">تواصل معنا عبر أي وسيلة تفضلها — نرد خلال ساعات.</p>
+      <a class="clink" href="tel:+963987184299"><div class="clink-icon cic-green">📞</div><div><div class="clink-val">+963 987 184 299</div><div class="clink-type" data-i18n="ct_phone">هاتف</div></div></a>
+      <a class="clink" href="mailto:abd.jwad1746@gmail.com"><div class="clink-icon cic-blue">✉️</div><div><div class="clink-val">abd.jwad1746@gmail.com</div><div class="clink-type" data-i18n="ct_email">بريد إلكتروني</div></div></a>
+      <a class="clink" href="https://t.me/Abdalrhman_aljwad" target="_blank"><div class="clink-icon cic-tg">✈️</div><div><div class="clink-val">@Abdalrhman_aljwad</div><div class="clink-type" data-i18n="ct_tg">تيليغرام</div></div></a>
+      <a class="clink" href="https://wa.me/963987184299" target="_blank"><div class="clink-icon cic-wa">💬</div><div><div class="clink-val">+963 987 184 299</div><div class="clink-type" data-i18n="ct_wa">واتساب</div></div></a>
+      <p style="font-size:.72rem;color:rgba(255,255,255,.12);margin-top:.6rem;font-family:'Outfit'" data-i18n="ct_resp">وقت الرد: خلال ٢–٤ ساعات</p>
     </div>
-
-    <!-- Right: form -->
     <div class="contact-box">
-      <div class="contact-head">
-        <div class="sec-eyebrow" style="justify-content:flex-start;margin-bottom:.5rem">
-          <span class="ar">أرسل رسالة</span><span class="en" style="display:none">Send a Message</span>
-          <span class="en" style="font-family:'Outfit';opacity:.4;font-size:.65rem">/ Get in Touch</span>
-        </div>
-      </div>
-      <div class="fgroup">
-        <label><span class="ar">الاسم الكامل</span><span class="en" style="display:none"> Full Name</span></label>
-        <input type="text" id="fname" placeholder="أدخل اسمك الكامل · Your full name">
-      </div>
-      <div class="fgroup">
-        <label><span class="ar">البريد الإلكتروني</span><span class="en" style="display:none"> Email Address</span></label>
-        <input type="email" id="femail" placeholder="example@email.com">
-      </div>
-      <div class="fgroup">
-        <label><span class="ar">رقم التواصل (اختياري)</span><span class="en" style="display:none"> Phone (optional)</span></label>
-        <input type="tel" id="fphone" placeholder="+963 ..." style="direction:ltr">
-      </div>
-      <div class="fgroup">
-        <label><span class="ar">الرسالة</span><span class="en" style="display:none"> Message</span></label>
-        <textarea id="fmsg" placeholder="أخبرنا عن فكرتك ومشروعك... · Tell us about your project..."></textarea>
-      </div>
-      <button class="submit-btn" id="sbtn">
-        <span class="ar">إرسال الرسالة ✦</span><span class="en" style="display:none">Send Message ✦</span>
-      </button>
+      <div class="fgroup"><label data-i18n="f_name">الاسم الكامل</label><input type="text" id="fname" data-i18n-ph="f_name_ph" placeholder="أدخل اسمك الكامل"></div>
+      <div class="fgroup"><label data-i18n="f_email">البريد الإلكتروني</label><input type="email" id="femail" placeholder="example@email.com"></div>
+      <div class="fgroup"><label data-i18n="f_phone">رقم التواصل (اختياري)</label><input type="tel" id="fphone" placeholder="+963 ..." style="direction:ltr"></div>
+      <div class="fgroup"><label data-i18n="f_msg">الرسالة</label><textarea id="fmsg" data-i18n-ph="f_msg_ph" placeholder="أخبرنا عن فكرتك ومشروعك..."></textarea></div>
+      <button class="submit-btn" id="sbtn" data-i18n="f_submit">إرسال الرسالة ✦</button>
     </div>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo-ar">البيان</div>
-  <div class="footer-logo-en">Al-Bayan Software</div>
-  <div class="footer-tagline-ar">نبني تطبيقات تصنع الفرق</div>
-  <div class="footer-tagline-en">We build apps that make a difference</div>
+  <div class="footer-logo-main" data-i18n="ft_logo">البيان</div>
+  <div class="footer-logo-sub">Al-Bayan Software</div>
+  <div class="footer-tagline" data-i18n="ft_tagline">نبني تطبيقات تصنع الفرق</div>
   <div class="footer-contact-row">
-    <a class="footer-citem" href="tel:+963987184299">📞 <span>+963 987 184 299</span></a>
-    <a class="footer-citem" href="mailto:abd.jwad1746@gmail.com">✉️ <span>abd.jwad1746@gmail.com</span></a>
-    <a class="footer-citem" href="https://t.me/Abdalrhman_aljwad" target="_blank">✈️ <span>@Abdalrhman_aljwad</span></a>
-    <a class="footer-citem" href="https://wa.me/963987184299" target="_blank">💬 <span>WhatsApp</span></a>
+    <a class="footer-citem" href="tel:+963987184299">📞 +963 987 184 299</a>
+    <a class="footer-citem" href="mailto:abd.jwad1746@gmail.com">✉️ abd.jwad1746@gmail.com</a>
+    <a class="footer-citem" href="https://t.me/Abdalrhman_aljwad" target="_blank">✈️ @Abdalrhman_aljwad</a>
+    <a class="footer-citem" href="https://wa.me/963987184299" target="_blank">💬 WhatsApp</a>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-links">
-    <a href="#"><span class="ar">الرئيسية</span><span class="en" style="display:none">Home</span></a>
-    <a href="#services"><span class="ar">خدماتنا</span><span class="en" style="display:none">Services</span></a>
-    <a href="#work"><span class="ar">أعمالنا</span><span class="en" style="display:none">Portfolio</span></a>
-    <a href="#about"><span class="ar">من نحن</span><span class="en" style="display:none">About</span></a>
-    <a href="#contact"><span class="ar">تواصل</span><span class="en" style="display:none">Contact</span></a>
+    <a href="#" data-i18n="nav_home">الرئيسية</a>
+    <a href="#services" data-i18n="nav_services">الخدمات</a>
+    <a href="#work" data-i18n="nav_work">الأعمال</a>
+    <a href="#about" data-i18n="nav_about">من نحن</a>
+    <a href="#contact" data-i18n="nav_contact">تواصل</a>
   </div>
-  <p class="footer-copy">© 2025 Al-Bayan · البيان — All Rights Reserved · جميع الحقوق محفوظة</p>
+  <p class="footer-copy">© 2025 Al-Bayan · البيان — <span data-i18n="ft_copy">جميع الحقوق محفوظة</span></p>
 </footer>
 
 <script>
+/* =============================================
+   TRANSLATIONS DICTIONARY
+   ============================================= */
+const T = {
+  ar: {
+    logo_main:'البيان', bar_badge:'🚀 إطلاق رسمي',
+    bar_text:'البيان تنطلق رسمياً — استشارة مجانية لأول ١٠ عملاء',
+    bar_cta:'احجز الآن ←',
+    popup_badge:'OFFICIAL LAUNCH · إطلاق رسمي',
+    popup_title:'البيان تنطلق رسمياً إلى العالم الرقمي!',
+    popup_desc:'استفد من عرض الإطلاق الحصري — استشارة مجانية وخصم ٢٠٪ على أول مشروع لأول ١٠ عملاء فقط.',
+    popup_offer:'عرض الإطلاق: <strong>استشارة مجانية + خصم ٢٠٪</strong> على أول مشروع',
+    popup_cta:'احجز استشارتك المجانية ✦', popup_skip:'تصفح الموقع أولاً',
+    cd_day:'يوم', cd_hr:'ساعة', cd_min:'دقيقة', cd_sec:'ثانية',
+    nav_services:'الخدمات', nav_work:'الأعمال', nav_about:'من نحن',
+    nav_contact:'تواصل', nav_btn:'ابدأ مشروعك ✦', nav_home:'الرئيسية',
+    hero_tag:'حلول برمجية ذكية',
+    hero_h1_line1:'نبني تطبيقات', hero_h1_line2:'تصنع المستقبل',
+    hero_desc:'في البيان، نحوّل أفكارك إلى منتجات رقمية قوية تدفع أعمالك للأمام وتحقق نتائج حقيقية تراها.',
+    hero_btn1:'ابدأ الآن ✦', hero_btn2:'اكتشف خدماتنا', scroll_hint:'اكتشف',
+    stat1:'مشروع منجز', stat2:'عميل سعيد', stat3:'سنوات خبرة', stat4:'نسبة الرضا',
+    srv_eyebrow:'خدماتنا', srv_title_1:'ماذا ', srv_title_em:'نقدم', srv_title_2:' لك؟',
+    srv_sub:'حلول برمجية متكاملة تحول أفكارك إلى منتجات رقمية ناجحة تتجاوز توقعاتك.',
+    s1_title:'تطبيقات الموبايل', s1_desc:'نصمم ونبني تطبيقات iOS وAndroid بأداء استثنائي وتجربة مستخدم لا تُنسى.',
+    s2_title:'تطبيقات الويب', s2_desc:'أنظمة ويب سريعة ومتكاملة مبنية بأحدث التقنيات لتدعم نمو أعمالك.',
+    s3_title:'تصميم UI/UX', s3_desc:'تصاميم عصرية مبهرة تركز على تجربة المستخدم وتحوّل الزوار إلى عملاء.',
+    s4_title:'صيانة ودعم', s4_desc:'نرافقك بعد الإطلاق بدعم مستمر وتحديثات دورية تضمن استقرار منتجك.',
+    learn_more:'اكتشف أكثر ←',
+    why_eyebrow:'لماذا نحن', why_title_1:'لماذا تختار ', why_title_em:'البيان', why_title_2:'؟',
+    why_sub:'نلتزم بجودة لا تقبل المساومة في كل مشروع نضع عليه بصمتنا.',
+    w1_title:'سرعة التنفيذ', w1_desc:'نلتزم بالمواعيد دون تأخير',
+    w2_title:'جودة عالية', w2_desc:'أحدث التقنيات وأفضل الممارسات',
+    w3_title:'حلول مخصصة', w3_desc:'كل مشروع فريد حسب احتياجك',
+    w4_title:'دعم مستمر', w4_desc:'معك بعد الإطلاق لضمان النجاح',
+    pf_eyebrow:'أعمالنا', pf_title_1:'مشاريع ', pf_title_em:'نفخر', pf_title_2:' بها',
+    pf_sub:'نماذج من إبداعاتنا التي أحدثت فرقاً حقيقياً لعملائنا.',
+    view_proj:'عرض المشروع ↗', web_tag:'ويب', mob_tag:'موبايل',
+    p1_title:'منصة تجارة إلكترونية', p1_desc:'متجر متكامل مع لوحة تحكم ذكية ونظام دفع آمن متعدد العملات.',
+    p2_title:'تطبيق حجز طبي', p2_desc:'تطبيق موبايل لإدارة المواعيد بين المرضى والأطباء بذكاء.',
+    p3_title:'داشبورد تحليلي', p3_desc:'لوحة بيانات متقدمة لاتخاذ قرارات مبنية على الأرقام الحقيقية.',
+    ab_eyebrow:'من نحن', ab_title_1:'شريكك في ', ab_title_em:'النجاح الرقمي',
+    ab_p1:'البيان شركة برمجية متخصصة في بناء التطبيقات الحديثة، نمكّن الشركات من التحول الرقمي بحلول مبتكرة وفعّالة.',
+    ab_p2:'فريقنا يعمل بشغف حقيقي لتحويل كل فكرة إلى منتج يصنع فرقاً ملموساً.',
+    ab_v_title:'رؤيتنا', ab_v_desc:'أن نكون الشريك الأول لكل شركة تسعى للنجاح الرقمي.',
+    ab_m_title:'مهمتنا', ab_m_desc:'تحويل الأفكار إلى منتجات رقمية ناجحة تتجاوز التوقعات.',
+    ab_val_title:'قيمنا', ab_val_desc:'الجودة — الالتزام — الابتكار — الشفافية الكاملة.',
+    fb1_text:'مشروع ناجح', fb2_text:'رضا العملاء',
+    lnch_eyebrow:'👑 إطلاق رسمي حصري',
+    lnch_t1:'اليوم نبدأ', lnch_t2:'رحلة النجاح', lnch_t3:'الرقمي معاً',
+    lnch_desc:'بعد سنوات من الخبرة والشغف، وصلنا اليوم لنقدم لك أفضل ما في عالم التقنية. البيان لم تُبنَ فقط لتصنع تطبيقات — بُنيت لتصنع قصص نجاح.',
+    lp1:'فريق من خبراء تقنيين محترفين', lp2:'منهجية عمل مثبتة النتائج',
+    lp3:'دعم كامل من الفكرة حتى الإطلاق', lp4:'ضمان الجودة أو استرداد كامل',
+    lnch_btn1:'ابدأ مشروعك 🚀', lnch_btn2:'اعرف أكثر',
+    lnch_card_title:'عروض الإطلاق الحصرية',
+    o1_title:'استشارة مجانية ٦٠ دقيقة', o1_desc:'نحلل فكرتك ونضع خارطة طريق واضحة',
+    o2_title:'خصم ٢٠٪ على أول مشروع', o2_desc:'حصري لأول ١٠ عملاء يتعاقدون',
+    o3_title:'نموذج أولي خلال ٧ أيام', o3_desc:'ترى شكل منتجك قبل أي التزام',
+    timer_label:'ينتهي العرض خلال',
+    ct_eyebrow:'تواصل معنا', ct_title_1:'هل لديك ', ct_title_em:'فكرة مشروع', ct_title_2:'؟',
+    ct_sub:'نحن جاهزون لتحويل فكرتك إلى واقع مبهر',
+    ct_direct:'تواصل مباشر', ct_direct_sub:'تواصل معنا عبر أي وسيلة تفضلها — نرد خلال ساعات.',
+    ct_phone:'هاتف', ct_email:'بريد إلكتروني', ct_tg:'تيليغرام', ct_wa:'واتساب',
+    ct_resp:'وقت الرد: خلال ٢–٤ ساعات',
+    f_name:'الاسم الكامل', f_name_ph:'أدخل اسمك الكامل',
+    f_email:'البريد الإلكتروني', f_phone:'رقم التواصل (اختياري)',
+    f_msg:'الرسالة', f_msg_ph:'أخبرنا عن فكرتك ومشروعك...',
+    f_submit:'إرسال الرسالة ✦',
+    ft_logo:'البيان', ft_tagline:'نبني تطبيقات تصنع الفرق', ft_copy:'جميع الحقوق محفوظة',
+    submit_ok:'✓ تم الإرسال بنجاح!', submit_err:'⚠ يرجى تعبئة الحقول المطلوبة',
+    marq:['تطبيقات موبايل','تصميم UI/UX','تطوير ويب','ذكاء اصطناعي','جودة عالية','دعم مستمر']
+  },
+  en: {
+    logo_main:'Al-Bayan', bar_badge:'🚀 Official Launch',
+    bar_text:'Al-Bayan is officially live — Free consultation for first 10 clients',
+    bar_cta:'Book Now →',
+    popup_badge:'OFFICIAL LAUNCH · إطلاق رسمي',
+    popup_title:'Al-Bayan Officially Enters the Digital World!',
+    popup_desc:'Take advantage of our exclusive launch offer — free consultation and 20% off your first project, for the first 10 clients only.',
+    popup_offer:'Launch Offer: <strong>Free Consultation + 20% Off</strong> your first project',
+    popup_cta:'Book Free Consultation ✦', popup_skip:'Browse the site first',
+    cd_day:'Day', cd_hr:'Hour', cd_min:'Min', cd_sec:'Sec',
+    nav_services:'Services', nav_work:'Portfolio', nav_about:'About',
+    nav_contact:'Contact', nav_btn:'Start Your Project ✦', nav_home:'Home',
+    hero_tag:'Smart Software Solutions',
+    hero_h1_line1:'We Build Apps', hero_h1_line2:'That Shape the Future',
+    hero_desc:'At Al-Bayan, we transform your ideas into powerful digital products that drive your business forward and deliver real, measurable results.',
+    hero_btn1:'Get Started ✦', hero_btn2:'Explore Services', scroll_hint:'Scroll',
+    stat1:'Projects Delivered', stat2:'Happy Clients', stat3:'Years Experience', stat4:'Satisfaction Rate',
+    srv_eyebrow:'Our Services', srv_title_1:'What Do We ', srv_title_em:'Offer', srv_title_2:' You?',
+    srv_sub:'Full-stack software solutions that transform your ideas into successful digital products exceeding all expectations.',
+    s1_title:'Mobile Applications', s1_desc:'We design and build iOS & Android apps with exceptional performance and an unforgettable user experience.',
+    s2_title:'Web Applications', s2_desc:'Fast, scalable web systems built with the latest technologies to support and accelerate your business growth.',
+    s3_title:'UI/UX Design', s3_desc:'Modern, stunning designs focused on user experience that convert visitors into loyal, paying customers.',
+    s4_title:'Maintenance & Support', s4_desc:'We stay with you post-launch with continuous support and periodic updates to ensure product stability.',
+    learn_more:'Learn more →',
+    why_eyebrow:'Why Us', why_title_1:'Why Choose ', why_title_em:'Al-Bayan', why_title_2:'?',
+    why_sub:'We commit to uncompromising quality in every single project we put our name on.',
+    w1_title:'Fast Delivery', w1_desc:'We meet deadlines, every time',
+    w2_title:'Premium Quality', w2_desc:'Latest tech, industry best practices',
+    w3_title:'Tailored Solutions', w3_desc:'Every project built around your needs',
+    w4_title:'Ongoing Support', w4_desc:'With you after launch to ensure success',
+    pf_eyebrow:'Our Work', pf_title_1:'Projects We\'re ', pf_title_em:'Proud', pf_title_2:' Of',
+    pf_sub:'A selection of our work that made a real, tangible difference for our clients.',
+    view_proj:'View Project ↗', web_tag:'Web', mob_tag:'Mobile',
+    p1_title:'E-Commerce Platform', p1_desc:'A full-featured store with a smart dashboard and a secure multi-currency payment system.',
+    p2_title:'Medical Booking App', p2_desc:'A mobile app for smart appointment management between patients and doctors.',
+    p3_title:'Analytics Dashboard', p3_desc:'An advanced data dashboard for making decisions based on real, accurate metrics.',
+    ab_eyebrow:'About Us', ab_title_1:'Your Partner in ', ab_title_em:'Digital Success',
+    ab_p1:'Al-Bayan is a specialized software company focused on building modern applications, empowering businesses to achieve digital transformation with innovative and effective solutions.',
+    ab_p2:'Our team works with genuine passion to turn every idea into a product that makes a real, tangible difference.',
+    ab_v_title:'Our Vision', ab_v_desc:'To be the go-to partner for every company seeking digital success.',
+    ab_m_title:'Our Mission', ab_m_desc:'Transforming ideas into successful digital products that exceed every expectation.',
+    ab_val_title:'Our Values', ab_val_desc:'Quality — Commitment — Innovation — Full Transparency.',
+    fb1_text:'Successful Projects', fb2_text:'Client Satisfaction',
+    lnch_eyebrow:'👑 Exclusive Official Launch',
+    lnch_t1:'Today We Begin', lnch_t2:'The Journey to', lnch_t3:'Digital Excellence',
+    lnch_desc:'After years of experience and passion, we arrive today to offer you the very best the tech world has. Al-Bayan wasn\'t built just to make apps — it was built to create success stories.',
+    lp1:'A team of professional tech experts', lp2:'Proven, results-driven methodology',
+    lp3:'Full support from idea to launch', lp4:'Quality guarantee or full refund',
+    lnch_btn1:'Start Your Project 🚀', lnch_btn2:'Learn More',
+    lnch_card_title:'Exclusive Launch Offers',
+    o1_title:'Free 60-Minute Consultation', o1_desc:'We analyze your idea and build a clear roadmap',
+    o2_title:'20% Off Your First Project', o2_desc:'Exclusive for the first 10 clients who sign up',
+    o3_title:'Prototype in 7 Days', o3_desc:'See your product before any financial commitment',
+    timer_label:'Offer ends in',
+    ct_eyebrow:'Contact Us', ct_title_1:'Got a ', ct_title_em:'Project Idea', ct_title_2:'?',
+    ct_sub:'We\'re ready to turn your vision into a stunning digital reality',
+    ct_direct:'Reach Us Directly', ct_direct_sub:'Contact us through any channel you prefer — we respond within hours.',
+    ct_phone:'Phone', ct_email:'Email', ct_tg:'Telegram', ct_wa:'WhatsApp',
+    ct_resp:'Response time: typically within 2–4 hours',
+    f_name:'Full Name', f_name_ph:'Enter your full name',
+    f_email:'Email Address', f_phone:'Phone Number (optional)',
+    f_msg:'Message', f_msg_ph:'Tell us about your idea and project...',
+    f_submit:'Send Message ✦',
+    ft_logo:'Al-Bayan', ft_tagline:'We Build Apps That Make a Difference', ft_copy:'All Rights Reserved',
+    submit_ok:'✓ Message Sent Successfully!', submit_err:'⚠ Please fill in all required fields',
+    marq:['Mobile Apps','UI/UX Design','Web Development','AI Solutions','Premium Quality','Ongoing Support']
+  }
+};
+
+let currentLang = 'ar';
+
+function applyTranslations(lang) {
+  const t = T[lang];
+  // Text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  // Marquee
+  const mt = document.getElementById('marqueeTrack');
+  if (mt && t.marq) {
+    const items = [...t.marq, ...t.marq].map(m => `<span class="marquee-item">${m}</span>`).join('');
+    mt.innerHTML = items;
+  }
+  // Direction & font
+  const isEn = lang === 'en';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isEn ? 'ltr' : 'rtl';
+  document.body.classList.toggle('en', isEn);
+  // Input direction
+  document.querySelectorAll('input:not([type=tel]),textarea').forEach(el => {
+    el.style.direction = isEn ? 'ltr' : 'rtl';
+  });
+  // Buttons
+  document.getElementById('btnAr').classList.toggle('active', !isEn);
+  document.getElementById('btnEn').classList.toggle('active', isEn);
+  document.title = isEn ? 'Al-Bayan — Smart Software Solutions' : 'البيان — حلول برمجية ذكية';
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  applyTranslations(lang);
+}
+
 /* ===== CURSOR ===== */
 const cur=document.getElementById('cur'),curRing=document.getElementById('curRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
 (function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animRing)})();
 document.querySelectorAll('a,button,.scard,.pcard,.why-item,.acard,.tech-pill,.stat,.clink,.offer-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curRing.style.width='55px';curRing.style.height='55px';curRing.style.borderColor='rgba(5,150,105,0.7)'});
-  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curRing.style.width='36px';curRing.style.height='36px';curRing.style.borderColor='rgba(16,185,129,0.5)'});
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curRing.style.width='55px';curRing.style.height='55px';curRing.style.borderColor='rgba(5,150,105,.7)'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curRing.style.width='36px';curRing.style.height='36px';curRing.style.borderColor='rgba(16,185,129,.5)'});
 });
 
-/* ===== LANG SWITCH ===== */
-function setLang(l){
-  document.body.classList.toggle('en-mode', l==='en');
-  document.getElementById('btnAr').classList.toggle('active', l==='ar');
-  document.getElementById('btnEn').classList.toggle('active', l==='en');
-  document.documentElement.lang = l==='en'?'en':'ar';
-  document.documentElement.dir = l==='en'?'ltr':'rtl';
-}
-
 /* ===== LOADER ===== */
-const lp=document.getElementById('loaderParticles');
+const lpEl=document.getElementById('loaderParticles');
 for(let i=0;i<28;i++){
   const p=document.createElement('div');p.className='lp';
-  const sz=Math.random()*3+1,x=Math.random()*100,y=Math.random()*100,dur=Math.random()*10+8,delay=Math.random()*5;
+  const sz=Math.random()*3+1,x=Math.random()*100,y=Math.random()*100,dur=Math.random()*10+8,d=Math.random()*5;
   const cols=['rgba(5,150,105','rgba(13,148,136','rgba(212,175,55'];
-  const c=cols[Math.floor(Math.random()*cols.length)];
-  p.style.cssText=`width:${sz}px;height:${sz}px;left:${x}%;top:${y}%;background:${c},${Math.random()*.4+.1});animation-duration:${dur}s;animation-delay:-${delay}s`;
-  p.style.animationName='lpFloat';lp.appendChild(p);
+  p.style.cssText=`width:${sz}px;height:${sz}px;left:${x}%;top:${y}%;background:${cols[i%3]},${Math.random()*.4+.1});animation-duration:${dur}s;animation-delay:-${d}s;animation-name:lpFloat`;
+  lpEl.appendChild(p);
 }
-const ss=document.createElement('style');
-ss.textContent=`@keyframes lpFloat{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-80vh);opacity:0}}`;
-document.head.appendChild(ss);
-
 let pct=0;const pEl=document.getElementById('loaderPct');
 const pt=setInterval(()=>{pct=Math.min(pct+(Math.random()*4+1),100);pEl.textContent=Math.round(pct)+'%';if(pct>=100)clearInterval(pt)},40);
 document.body.style.overflow='hidden';
@@ -953,10 +907,9 @@ function burstConfetti(){
   const r=popup.getBoundingClientRect();
   for(let i=0;i<55;i++){
     const el=document.createElement('div');
-    const sz=Math.random()*8+3,col=cols[Math.floor(Math.random()*cols.length)];
-    const ang=Math.random()*360,dist=Math.random()*200+80;
+    const sz=Math.random()*8+3,col=cols[i%cols.length],ang=Math.random()*360,dist=Math.random()*200+80;
     const tx=Math.cos(ang*Math.PI/180)*dist,ty=Math.sin(ang*Math.PI/180)*dist-80;
-    el.style.cssText=`position:fixed;left:${r.left+r.width/2}px;top:${r.top+r.height/3}px;width:${sz}px;height:${sz}px;background:${col};border-radius:${Math.random()>.5?'50%':'2px'};pointer-events:none;z-index:99994;transition:none`;
+    el.style.cssText=`position:fixed;left:${r.left+r.width/2}px;top:${r.top+r.height/3}px;width:${sz}px;height:${sz}px;background:${col};border-radius:${Math.random()>.5?'50%':'2px'};pointer-events:none;z-index:99994`;
     document.body.appendChild(el);
     requestAnimationFrame(()=>{el.style.transition=`all ${Math.random()*.7+.4}s cubic-bezier(.25,.46,.45,.94)`;el.style.transform=`translate(${tx}px,${ty}px) rotate(${Math.random()*720}deg) scale(0)`;el.style.opacity='0'});
     setTimeout(()=>el.remove(),1400);
@@ -966,12 +919,12 @@ function burstConfetti(){
 /* ===== COUNTDOWN ===== */
 const launchEnd=new Date(Date.now()+7*24*60*60*1000);
 function pad(n){return String(n).padStart(2,'0')}
-function setFlip(id,val){const el=document.getElementById(id);if(!el)return;if(el.textContent!==pad(val)){el.classList.add('flip');setTimeout(()=>el.classList.remove('flip'),300);el.textContent=pad(val)}}
+function setFlip(id,val){const el=document.getElementById(id);if(!el||el.textContent===pad(val))return;el.classList.add('flip');setTimeout(()=>el.classList.remove('flip'),300);el.textContent=pad(val)}
 function tick(){
   const diff=Math.max(0,launchEnd-Date.now());
   const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
   setFlip('pd',d);setFlip('ph',h);setFlip('pm',m);setFlip('ps',s);
-  ['md','mh','mm','ms'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=pad([d,h,m,s][i])});
+  [['md',d],['mh',h],['mm',m],['ms',s]].forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.textContent=pad(v)});
 }
 tick();setInterval(tick,1000);
 
@@ -980,12 +933,12 @@ const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
 let W,H,pts=[];
 function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
 resize();addEventListener('resize',resize);
-class P{constructor(){this.reset()}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.sz=Math.random()*1.6+.3;this.sx=(Math.random()-.5)*.3;this.sy=(Math.random()-.5)*.3;this.op=Math.random()*.35+.05;this.c=Math.random()>.5?'5,150,105':Math.random()>.5?'13,148,136':'212,175,55'}update(){this.x+=this.sx;this.y+=this.sy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${this.c},${this.op})`;ctx.fill()}}
+class P{constructor(){this.reset()}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.sz=Math.random()*1.6+.3;this.sx=(Math.random()-.5)*.3;this.sy=(Math.random()-.5)*.3;this.op=Math.random()*.35+.05;const c=['5,150,105','13,148,136','212,175,55'];this.c=c[Math.floor(Math.random()*3)]}update(){this.x+=this.sx;this.y+=this.sy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${this.c},${this.op})`;ctx.fill()}}
 for(let i=0;i<90;i++)pts.push(new P());
 function connect(){for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.strokeStyle=`rgba(5,150,105,${.05*(1-d/100)})`;ctx.lineWidth=.5;ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}}}
 (function anim(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.update();p.draw()});connect();requestAnimationFrame(anim)})();
 
-/* ===== SCROLL NAV ===== */
+/* ===== NAV SCROLL ===== */
 const nav=document.getElementById('mainNav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
 
@@ -1003,9 +956,10 @@ document.getElementById('sbtn').addEventListener('click',function(){
   const name=document.getElementById('fname').value.trim();
   const email=document.getElementById('femail').value.trim();
   const msg=document.getElementById('fmsg').value.trim();
-  if(!name||!email||!msg){this.textContent='⚠ يرجى تعبئة الحقول المطلوبة / Fill required fields';this.style.background='linear-gradient(135deg,#92400e,#b45309)';setTimeout(()=>{this.textContent='إرسال الرسالة ✦';this.style.background=''},2500);return}
-  this.textContent='✓ تم الإرسال بنجاح / Message Sent!';this.style.background='linear-gradient(135deg,#065f46,#059669)';
-  setTimeout(()=>{this.textContent='إرسال الرسالة ✦';this.style.background='';document.getElementById('fname').value='';document.getElementById('femail').value='';document.getElementById('fphone').value='';document.getElementById('fmsg').value=''},3500);
+  const t=T[currentLang];
+  if(!name||!email||!msg){this.innerHTML=t.submit_err;this.style.background='linear-gradient(135deg,#92400e,#b45309)';setTimeout(()=>{this.innerHTML=t.f_submit;this.style.background=''},2500);return}
+  this.innerHTML=t.submit_ok;this.style.background='linear-gradient(135deg,#065f46,#059669)';
+  setTimeout(()=>{this.innerHTML=t.f_submit;this.style.background='';document.getElementById('fname').value='';document.getElementById('femail').value='';document.getElementById('fphone').value='';document.getElementById('fmsg').value=''},3500);
 });
 
 /* ===== MOBILE NAV ===== */
